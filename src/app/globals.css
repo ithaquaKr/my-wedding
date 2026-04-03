@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-blush: #f9e4ec;
+  --color-rose-gold: #c0607a;
+  --color-dusty-rose: #b08090;
+  --color-peach: #fce4d6;
+  --color-ivory: #fffaf8;
+  --color-rose-light: #f0d0e0;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Lato', system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fffaf8;
+  color: #4a3040;
+}
+
+/* Falling petals animation */
+@keyframes petalFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.petal {
+  position: absolute;
+  width: 12px;
+  height: 16px;
+  background: #f9e4ec;
+  border-radius: 50% 0 50% 0;
+  animation: petalFall linear infinite;
+  opacity: 0.8;
+}
+
+.petal:nth-child(1)  { left: 5%;  animation-duration: 4.5s; animation-delay: 0s;    width: 10px; height: 14px; }
+.petal:nth-child(2)  { left: 15%; animation-duration: 5.2s; animation-delay: 0.5s;  background: #fce4d6; }
+.petal:nth-child(3)  { left: 25%; animation-duration: 4.8s; animation-delay: 1.2s;  width: 8px; height: 12px; }
+.petal:nth-child(4)  { left: 35%; animation-duration: 5.5s; animation-delay: 0.3s;  background: #f0d0e0; }
+.petal:nth-child(5)  { left: 45%; animation-duration: 4.2s; animation-delay: 1.8s;  }
+.petal:nth-child(6)  { left: 55%; animation-duration: 5.8s; animation-delay: 0.7s;  background: #fce4d6; width: 14px; height: 18px; }
+.petal:nth-child(7)  { left: 65%; animation-duration: 4.6s; animation-delay: 2.1s;  }
+.petal:nth-child(8)  { left: 75%; animation-duration: 5.1s; animation-delay: 0.9s;  background: #f0d0e0; }
+.petal:nth-child(9)  { left: 85%; animation-duration: 4.9s; animation-delay: 1.5s;  width: 9px; height: 13px; }
+.petal:nth-child(10) { left: 92%; animation-duration: 5.4s; animation-delay: 0.2s;  background: #fce4d6; }
+.petal:nth-child(11) { left: 10%; animation-duration: 6.0s; animation-delay: 2.8s;  }
+.petal:nth-child(12) { left: 70%; animation-duration: 4.3s; animation-delay: 3.2s;  background: #f9e4ec; width: 11px; height: 15px; }
+
+/* Thin divider line */
+.divider-rose {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c0607a, transparent);
+  margin: 0 auto;
+}
+
+/* Section label */
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #b08090;
 }
