@@ -1,0 +1,5 @@
+{"type":"server-started","port":62914,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:62914","screen_dir":"/Users/ithaqua/work/project/my-wedding/.superpowers/brainstorm/20459-1775230019/content","state_dir":"/Users/ithaqua/work/project/my-wedding/.superpowers/brainstorm/20459-1775230019/state"}
+{"type":"screen-added","file":"/Users/ithaqua/work/project/my-wedding/.superpowers/brainstorm/20459-1775230019/content/visual-style.html"}
+{"type":"screen-added","file":"/Users/ithaqua/work/project/my-wedding/.superpowers/brainstorm/20459-1775230019/content/waiting-1.html"}
+{"type":"screen-added","file":"/Users/ithaqua/work/project/my-wedding/.superpowers/brainstorm/20459-1775230019/content/layout-wireframe.html"}
+{"type":"server-stopped","reason":"owner process exited"}
