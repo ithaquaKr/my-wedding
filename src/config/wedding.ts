@@ -18,9 +18,9 @@ export type WeddingConfig = {
 }
 
 export const weddingConfig: WeddingConfig = {
-  groom: 'Nguyễn Tuấn Hiệp',
-  bride: 'Trương Khánh Linh',
-  weddingDate: '2026-12-12T10:00:00', // ← THAY NGÀY THỰC TẾ
+  groom: 'Tuấn Hiệp',
+  bride: 'Khánh Linh',
+  weddingDate: '2026-05-10T10:00:00', // 10/05 dương lịch = 24/03 âm lịch
   venueName: '[TÊN NHÀ HÀNG / TRUNG TÂM TIỆC CƯỚI]',
   venueAddress: '[ĐỊA CHỈ ĐẦY ĐỦ]',
   venueMapEmbedUrl: '[GOOGLE_MAPS_EMBED_URL]',

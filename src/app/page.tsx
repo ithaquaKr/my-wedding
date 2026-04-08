@@ -17,13 +17,13 @@ export default function Home() {
 
   // Skip opening screen if already seen this session
   useEffect(() => {
-    if (sessionStorage.getItem('opened') === 'true') {
+    if (sessionStorage.getItem('wedding-opened') === 'true') {
       setOpened(true)
     }
   }, [])
 
   const handleOpen = () => {
-    sessionStorage.setItem('opened', 'true')
+    sessionStorage.setItem('wedding-opened', 'true')
     setOpened(true)
   }
 
