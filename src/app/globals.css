@@ -42,9 +42,10 @@ body {
 /* ── Script (calligraphy) helper used for hero name ── */
 .font-script {
   font-family: var(--font-script);
-  font-weight: 700;
+  font-weight: 400;
   font-style: normal;
-  letter-spacing: 0;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 /* ── Section eyebrow label ── */

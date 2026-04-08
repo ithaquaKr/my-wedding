@@ -30,12 +30,12 @@ export function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center text-[var(--color-cream)]">
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-3 text-center text-[var(--color-cream)]">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="eyebrow text-[var(--color-cream)]"
+          className="eyebrow"
           style={{
             color: 'var(--color-cream)',
             textShadow: '0 1px 12px rgba(0,0,0,0.6)',
@@ -48,14 +48,20 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, delay: 0.4 }}
-          className="font-script mt-4 text-[clamp(4rem,14vw,12rem)] leading-[0.95]"
+          className="font-script mt-2 leading-[1.05]"
           style={{
             color: 'var(--color-cream)',
-            textShadow: '0 4px 28px rgba(0,0,0,0.55)',
+            // Single-line responsive: scales by viewport, capped, never wraps.
+            // Italianno glyphs are narrow so ~9.5vw fits ~22 chars on a phone.
+            fontSize: 'min(11vw, 9rem)',
+            textShadow: '0 4px 30px rgba(0,0,0,0.6)',
           }}
         >
           {weddingConfig.groom}
-          <span className="font-script italic font-normal text-[0.7em] mx-2 opacity-90">
+          <span
+            className="font-script mx-[0.15em] align-middle"
+            style={{ fontSize: '0.75em', opacity: 0.95 }}
+          >
             &amp;
           </span>
           {weddingConfig.bride}

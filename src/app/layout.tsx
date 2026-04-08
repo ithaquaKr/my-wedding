@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Inter, Dancing_Script } from 'next/font/google'
+import { Playfair_Display, Inter, Italianno } from 'next/font/google'
 import './globals.css'
 import { weddingConfig } from '@/config/wedding'
 
@@ -18,9 +18,9 @@ const inter = Inter({
   display: 'swap',
 })
 
-const dancing = Dancing_Script({
+const italianno = Italianno({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400'],
   variable: '--font-script',
   display: 'swap',
 })
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi">
-      <body className={`${playfair.variable} ${inter.variable} ${dancing.variable} antialiased`}>
+      <body className={`${playfair.variable} ${inter.variable} ${italianno.variable} antialiased`}>
         {children}
       </body>
     </html>
