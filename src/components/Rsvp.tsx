@@ -1,149 +1,163 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { weddingConfig } from '@/config/wedding'
+import { Countdown } from './Countdown'
 
 type FormState = {
   name: string
-  phone: string
-  attending: boolean
-  guests: number
-  note: string
+  attending: 'yes' | 'no' | ''
+  guests: string
+  message: string
 }
 
-type SubmitStatus = 'idle' | 'loading' | 'success' | 'error'
+const initial: FormState = {
+  name: '',
+  attending: '',
+  guests: '1',
+  message: '',
+}
+
+function buildMailto(data: FormState) {
+  const subject = `RSVP – ${weddingConfig.groom} & ${weddingConfig.bride}`
+  const lines = [
+    `Họ và tên: ${data.name}`,
+    `Tham dự: ${data.attending === 'yes' ? 'Có' : data.attending === 'no' ? 'Không' : ''}`,
+    `Số khách: ${data.guests}`,
+    '',
+    'Lời nhắn:',
+    data.message,
+  ]
+  const body = lines.join('\n')
+  return `mailto:${weddingConfig.rsvpEmail}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`
+}
 
 export function Rsvp() {
-  const [form, setForm] = useState<FormState>({
-    name: '',
-    phone: '',
-    attending: true,
-    guests: 1,
-    note: '',
-  })
-  const [status, setStatus] = useState<SubmitStatus>('idle')
+  const [data, setData] = useState<FormState>(initial)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleChange = (key: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setData((prev) => ({ ...prev, [key]: e.target.value }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setStatus('loading')
-    try {
-      const res = await fetch('/api/rsvp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      if (!res.ok) throw new Error()
-      setStatus('success')
-    } catch {
-      setStatus('error')
-    }
+    window.location.href = buildMailto(data)
   }
 
   return (
     <section
       id="rsvp"
-      className="py-24 px-8"
-      style={{ background: 'linear-gradient(135deg, #f9e4ec 0%, #fce4d6 100%)' }}
+      className="relative bg-[var(--color-cream)] py-28 md:py-36 px-6"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="max-w-md mx-auto"
-      >
-        <div className="text-center mb-10">
-          <p className="section-label mb-3">Xác nhận tham dự</p>
-          <div className="divider-rose" />
-        </div>
+      <div className="mx-auto max-w-7xl grid gap-12 md:gap-20 md:grid-cols-2 items-center">
+        {/* Portrait */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="editorial-photo aspect-[4/5] w-full"
+        >
+          <Image
+            src={weddingConfig.rsvpImage}
+            alt="Couple portrait"
+            width={1000}
+            height={1250}
+          />
+        </motion.div>
 
-        {status === 'success' ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-12 space-y-4"
-          >
-            <div className="text-5xl">💌</div>
-            <h3 className="font-serif text-2xl text-rose-gold italic">Cảm ơn bạn!</h3>
-            <p className="font-sans text-dusty-rose text-sm">
-              Chúng tôi đã nhận được xác nhận của bạn và rất mong được gặp bạn trong ngày vui!
-            </p>
-          </motion.div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              placeholder="Họ tên của bạn *"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              required
-              className="w-full px-4 py-3 rounded-xl border border-rose-light bg-white/80 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-rose-gold/40 placeholder:text-dusty-rose/60"
-            />
-            <input
-              type="tel"
-              placeholder="Số điện thoại *"
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              required
-              className="w-full px-4 py-3 rounded-xl border border-rose-light bg-white/80 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-rose-gold/40 placeholder:text-dusty-rose/60"
-            />
+        {/* Form column */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="font-display text-[clamp(3rem,8vw,6rem)] leading-[0.9]">
+            R<span className="italic font-normal">S</span>VP
+          </h2>
+          <p className="eyebrow mt-4">Xác nhận tham dự</p>
+          <p className="mt-6 text-[var(--color-ink-muted)] leading-relaxed max-w-md">
+            Vui lòng phản hồi trước ngày <strong>30/04/2026</strong> để chúng tôi
+            có thể chuẩn bị chu đáo nhất cho ngày trọng đại.
+          </p>
 
-            <div className="flex gap-3">
-              {[
-                { value: true, label: '✅ Sẽ tham dự' },
-                { value: false, label: '❌ Không thể đến' },
-              ].map(({ value, label }) => (
-                <button
-                  key={String(value)}
-                  type="button"
-                  onClick={() => setForm({ ...form, attending: value })}
-                  className={`flex-1 py-3 rounded-xl border font-sans text-sm transition-colors cursor-pointer ${
-                    form.attending === value
-                      ? 'bg-rose-gold text-white border-rose-gold'
-                      : 'bg-white/80 text-dusty-rose border-rose-light hover:border-rose-gold'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
+          <div className="mt-10">
+            <Countdown />
+          </div>
+
+          <form className="mt-12 space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label className="eyebrow block mb-2">Họ và tên</label>
+              <input
+                required
+                type="text"
+                value={data.name}
+                onChange={handleChange('name')}
+                className="input-line"
+                placeholder="Nhập họ và tên của bạn"
+              />
             </div>
 
-            {form.attending && (
-              <div className="flex items-center gap-3">
-                <label className="font-sans text-sm text-dusty-rose whitespace-nowrap">Số người:</label>
-                <input
-                  type="number"
-                  min={1}
-                  max={10}
-                  value={form.guests}
-                  onChange={(e) => setForm({ ...form, guests: Number(e.target.value) })}
-                  className="w-20 px-3 py-2 rounded-xl border border-rose-light bg-white/80 font-sans text-sm text-center focus:outline-none focus:ring-2 focus:ring-rose-gold/40"
-                />
+            <div>
+              <label className="eyebrow block mb-3">Bạn có thể tham dự không?</label>
+              <div className="flex gap-8">
+                {(['yes', 'no'] as const).map((val) => (
+                  <label
+                    key={val}
+                    className="flex items-center gap-3 cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      name="attending"
+                      value={val}
+                      checked={data.attending === val}
+                      onChange={() => setData((p) => ({ ...p, attending: val }))}
+                      className="accent-[var(--color-ink)]"
+                    />
+                    <span className="text-sm text-[var(--color-ink)]">
+                      {val === 'yes' ? 'Có, chắc chắn rồi' : 'Rất tiếc, không thể'}
+                    </span>
+                  </label>
+                ))}
               </div>
-            )}
+            </div>
 
-            <textarea
-              placeholder="Lời nhắn (không bắt buộc)"
-              value={form.note}
-              onChange={(e) => setForm({ ...form, note: e.target.value })}
-              rows={3}
-              className="w-full px-4 py-3 rounded-xl border border-rose-light bg-white/80 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-rose-gold/40 placeholder:text-dusty-rose/60 resize-none"
-            />
+            <div>
+              <label className="eyebrow block mb-2">Số lượng khách</label>
+              <input
+                type="number"
+                min={1}
+                max={10}
+                value={data.guests}
+                onChange={handleChange('guests')}
+                className="input-line"
+              />
+            </div>
 
-            {status === 'error' && (
-              <p className="text-red-400 text-sm text-center">Có lỗi xảy ra, vui lòng thử lại 🙏</p>
-            )}
+            <div>
+              <label className="eyebrow block mb-2">Lời nhắn gửi cô dâu chú rể</label>
+              <textarea
+                value={data.message}
+                onChange={handleChange('message')}
+                className="input-line resize-none"
+                rows={3}
+                placeholder="Vài lời chúc phúc..."
+              />
+            </div>
 
-            <button
-              type="submit"
-              disabled={status === 'loading'}
-              className="w-full py-4 bg-rose-gold text-white rounded-xl font-sans font-light tracking-widest text-sm hover:bg-dusty-rose transition-colors disabled:opacity-60 cursor-pointer"
-            >
-              {status === 'loading' ? 'Đang gửi...' : 'Gửi xác nhận 💌'}
-            </button>
+            <div className="pt-4">
+              <button type="submit" className="btn-ink">
+                Gửi xác nhận
+              </button>
+            </div>
           </form>
-        )}
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   )
 }

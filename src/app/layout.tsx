@@ -1,29 +1,25 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Josefin_Sans, Dancing_Script } from 'next/font/google'
+import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import { weddingConfig } from '@/config/wedding'
 
 const playfair = Playfair_Display({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  variable: '--font-display',
+  display: 'swap',
 })
 
-const josefin = Josefin_Sans({
+const inter = Inter({
   subsets: ['latin', 'vietnamese'],
-  weight: ['300', '400', '600'],
-  variable: '--font-lato',
-})
-
-const dancing = Dancing_Script({
-  subsets: ['latin', 'vietnamese'],
-  weight: ['400', '600', '700'],
-  variable: '--font-script',
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-body',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: `Thiệp Cưới | ${weddingConfig.groom} & ${weddingConfig.bride}`,
+  title: `${weddingConfig.groom} & ${weddingConfig.bride} | Wedding`,
   description: `Trân trọng kính mời bạn đến dự lễ cưới của ${weddingConfig.groom} và ${weddingConfig.bride}`,
   openGraph: {
     title: `${weddingConfig.groom} & ${weddingConfig.bride}`,
@@ -34,7 +30,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi">
-      <body className={`${playfair.variable} ${josefin.variable} ${dancing.variable} antialiased`}>
+      <body className={`${playfair.variable} ${inter.variable} antialiased`}>
         {children}
       </body>
     </html>

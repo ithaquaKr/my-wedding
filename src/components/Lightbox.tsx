@@ -35,14 +35,14 @@ export function Lightbox({ images, currentIndex, onClose, onPrev, onNext }: Ligh
           onClick={onClose}
         >
           <button
-            className="absolute top-4 right-4 text-white text-3xl hover:text-rose-light transition-colors cursor-pointer"
+            className="absolute top-4 right-4 text-white text-3xl hover:opacity-60 transition-opacity cursor-pointer"
             onClick={onClose}
             aria-label="Đóng"
           >
             ×
           </button>
           <button
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-rose-light transition-colors px-2 cursor-pointer"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl hover:opacity-60 transition-opacity px-2 cursor-pointer"
             onClick={(e) => { e.stopPropagation(); onPrev() }}
             aria-label="Ảnh trước"
           >
@@ -62,14 +62,15 @@ export function Lightbox({ images, currentIndex, onClose, onPrev, onNext }: Ligh
               alt={`Ảnh ${currentIndex + 1}`}
               width={1200}
               height={800}
-              className="object-contain w-full h-full max-h-[85vh] rounded-lg"
+              className="object-contain w-full h-full max-h-[85vh]"
+              style={{ filter: 'grayscale(1) contrast(1.05)' }}
             />
-            <p className="text-center text-white/60 text-sm mt-3">
+            <p className="text-center text-white/60 text-sm mt-3 tracking-[0.3em] uppercase">
               {currentIndex + 1} / {images.length}
             </p>
           </motion.div>
           <button
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-rose-light transition-colors px-2 cursor-pointer"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl hover:opacity-60 transition-opacity px-2 cursor-pointer"
             onClick={(e) => { e.stopPropagation(); onNext() }}
             aria-label="Ảnh tiếp"
           >

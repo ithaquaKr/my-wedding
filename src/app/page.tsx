@@ -1,53 +1,33 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { Opening } from '@/components/Opening'
 import { Hero } from '@/components/Hero'
-import { Countdown } from '@/components/Countdown'
+import { ImportantDates } from '@/components/ImportantDates'
 import { OurStory } from '@/components/OurStory'
-import { Gallery } from '@/components/Gallery'
-import { Rsvp } from '@/components/Rsvp'
+import { TheWedding } from '@/components/TheWedding'
+import { Schedule } from '@/components/Schedule'
 import { Map } from '@/components/Map'
-import { Wishes } from '@/components/Wishes'
+import { TravelStay } from '@/components/TravelStay'
+import { GiftRegistry } from '@/components/GiftRegistry'
+import { Rsvp } from '@/components/Rsvp'
+import { Gallery } from '@/components/Gallery'
+import { Footer } from '@/components/Footer'
 import { FloatingNav } from '@/components/FloatingNav'
-import { weddingConfig } from '@/config/wedding'
 
 export default function Home() {
-  const [opened, setOpened] = useState(false)
-
-  // Skip opening screen if already seen this session
-  useEffect(() => {
-    if (sessionStorage.getItem('wedding-opened') === 'true') {
-      setOpened(true)
-    }
-  }, [])
-
-  const handleOpen = () => {
-    sessionStorage.setItem('wedding-opened', 'true')
-    setOpened(true)
-  }
-
   return (
     <>
-      {!opened && <Opening onOpen={handleOpen} />}
       <main>
         <Hero />
-        <Countdown />
+        <ImportantDates />
         <OurStory />
-        <Gallery />
-        <Rsvp />
+        <TheWedding />
+        <Schedule />
         <Map />
-        <Wishes />
+        <TravelStay />
+        <GiftRegistry />
+        <Rsvp />
+        <Gallery />
       </main>
+      <Footer />
       <FloatingNav />
-      <footer className="py-10 text-center" style={{ background: 'rgba(249,228,236,0.4)' }}>
-        <p className="font-serif text-dusty-rose italic text-lg">
-          {weddingConfig.groom} & {weddingConfig.bride}
-        </p>
-        <p className="font-sans text-xs text-rose-light mt-2 tracking-widest">
-          Made with 💕
-        </p>
-      </footer>
     </>
   )
 }
