@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Playfair_Display, Inter, Dancing_Script } from 'next/font/google'
 import './globals.css'
 import { weddingConfig } from '@/config/wedding'
 
@@ -18,6 +18,13 @@ const inter = Inter({
   display: 'swap',
 })
 
+const dancing = Dancing_Script({
+  subsets: ['latin', 'vietnamese'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-script',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: `${weddingConfig.groom} & ${weddingConfig.bride} | Wedding`,
   description: `Trân trọng kính mời bạn đến dự lễ cưới của ${weddingConfig.groom} và ${weddingConfig.bride}`,
@@ -30,7 +37,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi">
-      <body className={`${playfair.variable} ${inter.variable} antialiased`}>
+      <body className={`${playfair.variable} ${inter.variable} ${dancing.variable} antialiased`}>
         {children}
       </body>
     </html>

@@ -12,6 +12,7 @@
   /* ── Typography ── */
   --font-display: var(--font-display), Georgia, serif;
   --font-body: var(--font-body), system-ui, sans-serif;
+  --font-script: var(--font-script), 'Apple Chancery', cursive;
 }
 
 html {
@@ -36,6 +37,14 @@ body {
   font-family: var(--font-display);
   font-weight: 500;
   letter-spacing: -0.01em;
+}
+
+/* ── Script (calligraphy) helper used for hero name ── */
+.font-script {
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0;
 }
 
 /* ── Section eyebrow label ── */
