@@ -12,11 +12,11 @@ export function TravelStay() {
       className="bg-[var(--color-cream)] py-28 md:py-36 px-6"
     >
       <div className="mx-auto max-w-6xl text-center">
-        <p className="eyebrow">Travel & stay</p>
+        <p className="eyebrow">Di chuyển & lưu trú</p>
         <h2 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] mt-4 leading-[0.95]">
-          PLAN YOUR STAY
+          LÊN KẾ HOẠCH CHO CHUYẾN ĐI
           <br />
-          <span className="italic font-normal">with ease</span>
+          <span className="italic font-normal">thật nhẹ nhàng</span>
         </h2>
         <p className="mt-6 text-[var(--color-ink-muted)] max-w-xl mx-auto">
           Để bạn có thể đến với chúng tôi nhẹ nhàng và thoải mái nhất.

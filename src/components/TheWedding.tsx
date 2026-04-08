@@ -71,11 +71,11 @@ export function TheWedding() {
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
         >
-          <p className="eyebrow">The wedding</p>
+          <p className="eyebrow">Lễ cưới</p>
           <h2 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] mt-4 leading-[0.95]">
-            JOIN US AS WE BEGIN
+            CÙNG CHÚNG TÔI BƯỚC VÀO
             <br />
-            <span className="italic font-normal">our forever</span>
+            <span className="italic font-normal">chương mới của cuộc đời</span>
           </h2>
           <p className="mt-6 text-[var(--color-ink-muted)] max-w-xl mx-auto">
             Chúng tôi sẽ không thể nói &ldquo;đồng ý&rdquo; nếu thiếu bạn ở bên cạnh.

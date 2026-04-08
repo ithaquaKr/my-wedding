@@ -26,7 +26,7 @@ const italianno = Italianno({
 })
 
 export const metadata: Metadata = {
-  title: `${weddingConfig.groom} & ${weddingConfig.bride} | Wedding`,
+  title: `${weddingConfig.groom} & ${weddingConfig.bride} | Đám cưới`,
   description: `Trân trọng kính mời bạn đến dự lễ cưới của ${weddingConfig.groom} và ${weddingConfig.bride}`,
   openGraph: {
     title: `${weddingConfig.groom} & ${weddingConfig.bride}`,

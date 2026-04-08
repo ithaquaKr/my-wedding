@@ -17,9 +17,9 @@ export function Gallery() {
       <div className="mx-auto max-w-7xl">
         <div className="flex items-end justify-between gap-8 mb-10">
           <div>
-            <p className="eyebrow">Album</p>
+            <p className="eyebrow">Bộ ảnh</p>
             <h2 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] mt-3 leading-none">
-              GALLERY
+              ALBUM CƯỚI
             </h2>
           </div>
           <div className="hidden md:block max-w-xs text-right">

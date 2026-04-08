@@ -20,7 +20,7 @@ export function Map() {
         >
           <p className="eyebrow">{venue.label}</p>
           <h2 className="font-display text-[clamp(2.5rem,7vw,5rem)] leading-[0.9] mt-3">
-            THE VENUE
+            ĐỊA ĐIỂM
           </h2>
         </motion.div>
 

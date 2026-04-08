@@ -18,12 +18,12 @@ export function OurStory() {
           transition={{ duration: 1 }}
           className="font-display text-[clamp(3rem,9vw,7rem)] leading-[0.9] tracking-tight text-[var(--color-ink)]"
         >
-          OUR <span className="italic font-normal">STORY</span>
+          CÂU CHUYỆN <span className="italic font-normal">CỦA CHÚNG TÔI</span>
         </motion.h2>
 
         <div className="mt-4 max-w-md">
           <p className="font-display italic text-2xl md:text-3xl text-[var(--color-ink)]">
-            From a chance encounter to forever.
+            Từ một lần gặp gỡ tình cờ đến mãi mãi bên nhau.
           </p>
         </div>
 

@@ -156,7 +156,7 @@ const activeVenue: Venue = activeSide === 'bride' ? brideVenue : groomVenue
 export const weddingConfig: WeddingConfig = {
   groom: 'Tuấn Hiệp',
   bride: 'Khánh Linh',
-  tagline: 'Save the date',
+  tagline: 'Lưu lại ngày này',
   weddingDate: '2026-05-10T10:00:00+07:00',
 
   importantDates: [

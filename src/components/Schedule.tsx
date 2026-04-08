@@ -11,11 +11,11 @@ export function Schedule() {
       className="bg-[var(--color-cream-soft)] py-28 md:py-36 px-6"
     >
       <div className="mx-auto max-w-6xl text-center">
-        <p className="eyebrow">Schedule of the day</p>
+        <p className="eyebrow">Lịch trình trong ngày</p>
         <h2 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] mt-4 leading-[0.95]">
-          HERE&rsquo;S WHAT TO EXPECT AS
+          NHỮNG KHOẢNH KHẮC ĐÁNG NHỚ
           <br />
-          <span className="italic font-normal">we celebrate together</span>
+          <span className="italic font-normal">khi chúng ta cùng chung vui</span>
         </h2>
 
         <hr className="hairline mt-14 mb-14" />

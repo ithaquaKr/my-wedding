@@ -11,11 +11,11 @@ export function GiftRegistry() {
       className="bg-[var(--color-cream-soft)] py-28 md:py-36 px-6"
     >
       <div className="mx-auto max-w-6xl text-center">
-        <p className="eyebrow">Gift registry</p>
+        <p className="eyebrow">Quà cưới</p>
         <h2 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] mt-4 leading-[0.95]">
-          YOUR PRESENCE IS THE GREATEST
+          SỰ HIỆN DIỆN CỦA BẠN
           <br />
-          <span className="italic font-normal">gift of all</span>
+          <span className="italic font-normal">là món quà ý nghĩa nhất</span>
         </h2>
         <p className="mt-6 text-[var(--color-ink-muted)] max-w-2xl mx-auto leading-relaxed">
           {weddingConfig.registry.intro}

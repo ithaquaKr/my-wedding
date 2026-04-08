@@ -78,9 +78,9 @@ export function Rsvp() {
           transition={{ duration: 1 }}
         >
           <h2 className="font-display text-[clamp(3rem,8vw,6rem)] leading-[0.9]">
-            R<span className="italic font-normal">S</span>VP
+            XÁC <span className="italic font-normal">NHẬN</span>
           </h2>
-          <p className="eyebrow mt-4">Xác nhận tham dự</p>
+          <p className="eyebrow mt-4">Tham dự cùng chúng tôi</p>
           <p className="mt-6 text-[var(--color-ink-muted)] leading-relaxed max-w-md">
             Vui lòng phản hồi trước ngày <strong>30/04/2026</strong> để chúng tôi
             có thể chuẩn bị chu đáo nhất cho ngày trọng đại.
