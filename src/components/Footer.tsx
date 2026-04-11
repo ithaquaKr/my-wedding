@@ -1,33 +1,71 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
 
 export function Footer() {
   const initials = `${weddingConfig.groom.charAt(0)} & ${weddingConfig.bride.charAt(0)}`
 
   return (
-    <footer className="bg-[var(--color-ink)] text-[var(--color-cream)] py-20 px-6">
+    <footer className="bg-[var(--color-ink)] text-[var(--color-cream)] py-24 px-6 overflow-hidden">
       <div className="mx-auto max-w-4xl text-center">
-        <p className="font-display text-5xl md:text-6xl tracking-wide">
-          {weddingConfig.groom.toUpperCase()} <span className="italic font-normal">&amp;</span>{' '}
+        <motion.p
+          initial={{ opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          className="font-display text-5xl md:text-7xl tracking-wide"
+        >
+          {weddingConfig.groom.toUpperCase()}{' '}
+          <span className="italic font-normal">&amp;</span>{' '}
           {weddingConfig.bride.toUpperCase()}
-        </p>
+        </motion.p>
 
-        <div className="mt-6 flex items-center justify-center gap-4 text-[var(--color-cream)]/70">
-          <span className="h-px w-8 bg-[var(--color-cream)]/50" />
-          <span className="eyebrow text-[var(--color-cream)]/80">
-            {initials}
-          </span>
-          <span className="h-px w-8 bg-[var(--color-cream)]/50" />
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, delay: 0.3 }}
+          className="mt-6 flex items-center justify-center gap-4 text-[var(--color-cream)]/70"
+        >
+          <motion.span
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="h-px w-10 bg-[var(--color-cream)]/50 block"
+            style={{ transformOrigin: 'right' }}
+          />
+          <span className="eyebrow text-[var(--color-cream)]/80">{initials}</span>
+          <motion.span
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="h-px w-10 bg-[var(--color-cream)]/50 block"
+            style={{ transformOrigin: 'left' }}
+          />
+        </motion.div>
 
-        <p className="mt-10 max-w-xl mx-auto text-sm leading-relaxed text-[var(--color-cream)]/70">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="mt-10 max-w-xl mx-auto text-sm leading-relaxed text-[var(--color-cream)]/70"
+        >
           {weddingConfig.footerNote}
-        </p>
+        </motion.p>
 
-        <p className="mt-12 text-[10px] tracking-[0.3em] uppercase text-[var(--color-cream)]/40">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.7 }}
+          className="mt-12 text-[10px] tracking-[0.3em] uppercase text-[var(--color-cream)]/35"
+        >
           &copy; {new Date().getFullYear()} — {weddingConfig.groom} &amp; {weddingConfig.bride}
-        </p>
+        </motion.p>
       </div>
     </footer>
   )
