@@ -43,3 +43,9 @@ next-env.d.ts
 # superpowers / AI tooling
 .superpowers/
 docs/superpowers/
+.claude/
+.opencode/
+plans/
+.repomixignore
+release-manifest.json
+
