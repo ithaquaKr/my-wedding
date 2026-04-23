@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
 import { Countdown } from '@/components/Countdown'
 
@@ -30,12 +30,13 @@ function CharReveal({ text, delay = 0 }: { text: string; delay?: number }) {
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
+  const shouldReduce = useReducedMotion()
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   })
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0])
+  const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ['0%', '0%'] : ['0%', '20%'])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], shouldReduce ? [1, 1] : [1, 0])
 
   return (
     <section
@@ -47,11 +48,11 @@ export function Hero() {
       <motion.div className="absolute inset-0 scale-[1.18]" style={{ y: bgY }}>
         <Image
           src={weddingConfig.heroImage}
-          alt="Wedding hero"
+          alt={`Ảnh cưới của ${weddingConfig.groom} và ${weddingConfig.bride}`}
           fill
           priority
           className="object-cover"
-          style={{ filter: 'grayscale(1) contrast(1.05) brightness(0.78)' }}
+          style={{ filter: 'grayscale(0.55) contrast(1.05) brightness(0.75) sepia(0.25) hue-rotate(300deg)' }}
         />
       </motion.div>
 
@@ -63,24 +64,24 @@ export function Hero() {
         className="absolute inset-0 z-[2]"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(0,0,0,0.48) 0%, rgba(0,0,0,0.18) 42%, rgba(0,0,0,0.78) 100%)',
+            'radial-gradient(ellipse at center, rgba(45,21,32,0.52) 0%, rgba(45,21,32,0.18) 42%, rgba(45,21,32,0.85) 100%)',
         }}
       />
 
       {/* Content — fades out on scroll */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-3 text-center text-[var(--color-cream)]"
+        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 sm:px-8 text-center text-[var(--color-cream)]"
       >
         {/* Tagline with letter-spacing animation */}
         <motion.p
           initial={{ opacity: 0, letterSpacing: '0.06em' }}
           animate={{ opacity: 1, letterSpacing: '0.3em' }}
           transition={{ duration: 2, delay: 0.2 }}
-          className="text-[var(--color-cream)] border border-[var(--color-cream)]/60 px-5 py-2"
+          className="text-[var(--color-cream)] border border-[var(--color-cream)]/60 px-3 py-1.5 sm:px-5 sm:py-2"
           style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '0.75rem',
+            fontSize: 'clamp(0.6rem, 1.8vw, 0.75rem)',
             fontWeight: 400,
             textTransform: 'uppercase',
           }}
@@ -90,9 +91,9 @@ export function Hero() {
 
         {/* Couple name — character-by-character reveal */}
         <h1
-          className="font-script mt-2 leading-[1.05] text-[var(--color-cream)]"
+          className="font-script mt-5 leading-[1.1] text-[var(--color-cream)] w-full whitespace-nowrap"
           style={{
-            fontSize: 'min(11vw, 9rem)',
+            fontSize: 'clamp(2.8rem, 5.5vw, 9rem)',
             textShadow: '0 4px 32px rgba(0,0,0,0.7)',
           }}
         >

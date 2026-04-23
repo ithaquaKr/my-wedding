@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Inter, Great_Vibes } from 'next/font/google'
+import { Playfair_Display, Inter, Corinthia, Dancing_Script } from 'next/font/google'
 import './globals.css'
 import { weddingConfig } from '@/config/wedding'
 
@@ -18,10 +18,17 @@ const inter = Inter({
   display: 'swap',
 })
 
-const greatVibes = Great_Vibes({
+const corinthia = Corinthia({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400'],
+  weight: ['400', '700'],
   variable: '--font-script',
+  display: 'swap',
+})
+
+const dancingScript = Dancing_Script({
+  subsets: ['latin', 'vietnamese'],
+  weight: ['400', '500', '600'],
+  variable: '--font-handwrite',
   display: 'swap',
 })
 
@@ -37,7 +44,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi">
-      <body className={`${playfair.variable} ${inter.variable} ${greatVibes.variable} antialiased`}>
+      <body className={`${playfair.variable} ${inter.variable} ${corinthia.variable} ${dancingScript.variable} antialiased`}>
         {children}
       </body>
     </html>

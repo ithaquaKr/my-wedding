@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
+import { staggerContainer, fadeUpChild } from '@/lib/animations'
 
 type Panel = {
   key: string
@@ -82,12 +83,19 @@ export function TheWedding() {
           </p>
         </motion.div>
 
-        <div className="mt-14 max-w-2xl mx-auto text-left">
+        <motion.div
+          className="mt-14 max-w-2xl mx-auto text-left"
+          variants={staggerContainer}
+          whileInView="visible"
+          initial="hidden"
+          viewport={{ once: true }}
+        >
           {panels.map((p) => {
             const isOpen = open === p.key
             return (
-              <div
+              <motion.div
                 key={p.key}
+                variants={fadeUpChild}
                 className="border-t border-[var(--color-hairline)] last:border-b"
               >
                 <button
@@ -98,8 +106,11 @@ export function TheWedding() {
                   <span className="font-display text-2xl md:text-3xl text-[var(--color-ink)]">
                     {p.label}
                   </span>
-                  <span className="text-2xl text-[var(--color-ink)] transition-transform"
-                        style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}>
+                  <span
+                    aria-hidden="true"
+                    className="text-2xl text-[var(--color-ink)] transition-transform duration-300"
+                    style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}
+                  >
                     +
                   </span>
                 </button>
@@ -116,10 +127,10 @@ export function TheWedding() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -47,11 +47,11 @@ function Unit({
       className="flex flex-col items-center gap-2"
     >
       <div
-        className="font-display leading-none tabular-nums border px-4 py-3 text-center flex overflow-hidden"
+        className="font-display leading-none tabular-nums border px-3 py-2 sm:px-4 sm:py-3 text-center flex overflow-hidden"
         style={{
-          fontSize: 'clamp(1.75rem, 4.5vw, 3.5rem)',
-          borderColor: dark ? 'rgba(237,231,217,0.22)' : 'var(--color-hairline)',
-          minWidth: '3.2ch',
+          fontSize: 'clamp(1.4rem, 5vw, 3.5rem)',
+          borderColor: dark ? 'rgba(253,238,243,0.22)' : 'var(--color-hairline)',
+          minWidth: '2.8ch',
         }}
       >
         {digits.map((d, i) => (
@@ -60,7 +60,7 @@ function Unit({
       </div>
       <div
         className="eyebrow"
-        style={{ color: dark ? 'rgba(237,231,217,0.55)' : undefined }}
+        style={{ color: dark ? 'rgba(253,238,243,0.55)' : undefined }}
       >
         {label}
       </div>
@@ -73,7 +73,7 @@ function Dot({ dark }: { dark: boolean }) {
     <span
       className="font-display text-xl pb-10 leading-none select-none"
       aria-hidden
-      style={{ color: dark ? 'rgba(237,231,217,0.28)' : 'var(--color-hairline)' }}
+      style={{ color: dark ? 'rgba(253,238,243,0.28)' : 'var(--color-hairline)' }}
     >
       ·
     </span>
@@ -98,7 +98,29 @@ export function Countdown({ dark = false, delay = 0 }: CountdownProps) {
     return () => clearInterval(timer)
   }, [])
 
-  if (!time) return <div className="h-24" aria-hidden />
+  if (!time) return (
+    <div className="flex flex-col items-center gap-4" aria-hidden="true">
+      <p className="eyebrow" style={{ visibility: 'hidden' }}>Còn lại</p>
+      <div className="flex items-end gap-2 sm:gap-3">
+        {(['Ngày', 'Giờ', 'Phút', 'Giây'] as const).map((label, i) => (
+          <div key={i} className="flex flex-col items-center gap-2">
+            <div
+              className="font-display leading-none tabular-nums border px-3 py-2 sm:px-4 sm:py-3 flex"
+              style={{
+                fontSize: 'clamp(1.4rem, 5vw, 3.5rem)',
+                borderColor: dark ? 'rgba(253,238,243,0.22)' : 'var(--color-hairline)',
+                minWidth: '2.8ch',
+                visibility: 'hidden',
+              }}
+            >
+              00
+            </div>
+            <div className="eyebrow" style={{ visibility: 'hidden' }}>{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 
   if (time.isPast) {
     return (
@@ -118,12 +140,12 @@ export function Countdown({ dark = false, delay = 0 }: CountdownProps) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay }}
         className="eyebrow"
-        style={{ color: dark ? 'rgba(237,231,217,0.5)' : undefined }}
+        style={{ color: dark ? 'rgba(253,238,243,0.5)' : undefined }}
       >
         Còn lại
       </motion.p>
 
-      <div className="flex items-end gap-3 sm:gap-4">
+      <div className="flex items-end gap-2 sm:gap-3">
         <Unit value={time.days} label="Ngày" delay={delay + 0.1} dark={dark} />
         <Dot dark={dark} />
         <Unit value={time.hours} label="Giờ" delay={delay + 0.18} dark={dark} />

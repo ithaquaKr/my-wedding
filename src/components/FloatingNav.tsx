@@ -11,13 +11,14 @@ const SECTIONS = [
   { id: 'venue',    label: 'Địa điểm' },
   { id: 'travel',   label: 'Lưu trú' },
   { id: 'registry', label: 'Quà cưới' },
-  { id: 'rsvp',     label: 'RSVP' },
+  { id: 'letter',   label: 'Thư ngỏ' },
   { id: 'gallery',  label: 'Album' },
 ]
 
 export function FloatingNav() {
   const [activeId, setActiveId] = useState<string>('hero')
   const [visible, setVisible] = useState(false)
+  const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,13 +54,25 @@ export function FloatingNav() {
             <button
               key={id}
               onClick={() => scrollTo(id)}
+              onMouseEnter={() => setHoveredId(id)}
+              onMouseLeave={() => setHoveredId(null)}
               title={label}
               aria-label={label}
-              className="group flex items-center justify-end gap-3 cursor-pointer"
+              className="flex items-center justify-end gap-3 cursor-pointer min-h-[44px] min-w-[44px]"
             >
-              <span className="hidden group-hover:block text-[10px] tracking-[0.2em] uppercase text-[var(--color-ink)] bg-[var(--color-cream-soft)] px-3 py-1 border border-[var(--color-hairline)] whitespace-nowrap">
-                {label}
-              </span>
+              <AnimatePresence>
+                {hoveredId === id && (
+                  <motion.span
+                    initial={{ opacity: 0, x: 8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 8 }}
+                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-ink)] bg-[var(--color-cream-soft)] px-3 py-1 border border-[var(--color-hairline)] whitespace-nowrap"
+                  >
+                    {label}
+                  </motion.span>
+                )}
+              </AnimatePresence>
               <div
                 className={`h-px transition-all duration-300 ${
                   activeId === id

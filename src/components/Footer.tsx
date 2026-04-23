@@ -4,7 +4,8 @@ import { motion } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
 
 export function Footer() {
-  const initials = `${weddingConfig.groom.charAt(0)} & ${weddingConfig.bride.charAt(0)}`
+  const lastInitial = (name: string) => name.trim().split(' ').at(-1)?.charAt(0) ?? name.charAt(0)
+  const initials = `${lastInitial(weddingConfig.groom)} & ${lastInitial(weddingConfig.bride)}`
 
   return (
     <footer className="bg-[var(--color-ink)] text-[var(--color-cream)] py-24 px-6 overflow-hidden">
@@ -52,7 +53,7 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="mt-10 max-w-xl mx-auto text-sm leading-relaxed text-[var(--color-cream)]/70"
+          className="mt-10 max-w-xl mx-auto px-6 sm:px-0 text-sm leading-relaxed text-[var(--color-cream)]/70"
         >
           {weddingConfig.footerNote}
         </motion.p>

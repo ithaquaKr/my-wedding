@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
+import { staggerContainer, fadeUpChild } from '@/lib/animations'
 
 export function OurStory() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -66,12 +67,19 @@ export function OurStory() {
             />
           </div>
 
-          <div className="space-y-20 md:space-y-28 md:pl-14">
+          <motion.div
+            className="space-y-20 md:space-y-28 md:pl-14"
+            variants={staggerContainer}
+            whileInView="visible"
+            initial="hidden"
+            viewport={{ once: true }}
+          >
             {weddingConfig.story.map((m, i) => {
               const reversed = i % 2 === 1
               return (
-                <div
+                <motion.div
                   key={i}
+                  variants={fadeUpChild}
                   className="grid items-center gap-8 md:gap-16 md:grid-cols-12"
                 >
                   {/* Photo — clip-path wipe reveal */}
@@ -108,10 +116,10 @@ export function OurStory() {
                       {m.description}
                     </p>
                   </motion.div>
-                </div>
+                </motion.div>
               )
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -50,12 +50,19 @@ export function Lightbox({ images, currentIndex, onClose, onPrev, onNext }: Ligh
           </button>
           <motion.div
             key={currentIndex}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -80) onNext()
+              else if (info.offset.x > 80) onPrev()
+            }}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.25 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl max-h-[85vh] w-full"
+            className="relative max-w-4xl max-h-[85vh] w-full cursor-grab active:cursor-grabbing"
           >
             <Image
               src={images[currentIndex]}

@@ -92,8 +92,9 @@ export function Rsvp() {
 
           <form className="mt-12 space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label className="eyebrow block mb-2">Họ và tên</label>
+              <label htmlFor="rsvp-name" className="eyebrow block mb-2">Họ và tên</label>
               <input
+                id="rsvp-name"
                 required
                 type="text"
                 value={data.name}
@@ -128,8 +129,9 @@ export function Rsvp() {
             </div>
 
             <div>
-              <label className="eyebrow block mb-2">Số lượng khách</label>
+              <label htmlFor="rsvp-guests" className="eyebrow block mb-2">Số lượng khách</label>
               <input
+                id="rsvp-guests"
                 type="number"
                 min={1}
                 max={10}
@@ -140,8 +142,9 @@ export function Rsvp() {
             </div>
 
             <div>
-              <label className="eyebrow block mb-2">Lời nhắn gửi cô dâu chú rể</label>
+              <label htmlFor="rsvp-message" className="eyebrow block mb-2">Lời nhắn gửi cô dâu chú rể</label>
               <textarea
+                id="rsvp-message"
                 value={data.message}
                 onChange={handleChange('message')}
                 className="input-line resize-none"

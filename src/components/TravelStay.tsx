@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
+import { staggerContainer, fadeUpChild } from '@/lib/animations'
 
 export function TravelStay() {
   const { airports, hotels, transportation } = weddingConfig.travel
@@ -25,14 +26,14 @@ export function TravelStay() {
         <hr className="hairline mt-14 mb-14" />
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
           className="grid gap-14 md:grid-cols-3 text-left"
+          variants={staggerContainer}
+          whileInView="visible"
+          initial="hidden"
+          viewport={{ once: true }}
         >
           {/* Airports */}
-          <div>
+          <motion.div variants={fadeUpChild}>
             <p className="eyebrow mb-5">Sân bay gần nhất</p>
             <ul className="space-y-3">
               {airports.map((a, i) => (
@@ -41,10 +42,10 @@ export function TravelStay() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Hotels */}
-          <div>
+          <motion.div variants={fadeUpChild}>
             <p className="eyebrow mb-5">Khách sạn gợi ý</p>
             <ul className="space-y-5">
               {hotels.map((h, i) => (
@@ -71,10 +72,10 @@ export function TravelStay() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Transportation */}
-          <div>
+          <motion.div variants={fadeUpChild}>
             <p className="eyebrow mb-5">Di chuyển</p>
             <ul className="space-y-3">
               {transportation.map((t, i) => (
@@ -83,7 +84,7 @@ export function TravelStay() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

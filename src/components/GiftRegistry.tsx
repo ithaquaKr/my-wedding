@@ -13,9 +13,9 @@ export function GiftRegistry() {
       <div className="mx-auto max-w-6xl text-center">
         <p className="eyebrow">Quà cưới</p>
         <h2 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] mt-4 leading-[0.95]">
-          SỰ HIỆN DIỆN CỦA BẠN
+          SỰ HIỆN DIỆN
           <br />
-          <span className="italic font-normal">là món quà ý nghĩa nhất</span>
+          <span className="italic font-normal">của bạn là món quà ý nghĩa nhất</span>
         </h2>
         <p className="mt-6 text-[var(--color-ink-muted)] max-w-2xl mx-auto leading-relaxed">
           {weddingConfig.registry.intro}

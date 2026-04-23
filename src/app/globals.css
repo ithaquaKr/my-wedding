@@ -1,22 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Editorial monochrome palette ── */
-  --color-cream: #ede7d9;
-  --color-cream-soft: #f4eee2;
-  --color-ink: #111111;
-  --color-ink-muted: #6b6459;
-  --color-hairline: #cfc6b3;
-  --color-paper: #ffffff;
+  /* ── Romantic blush palette ── */
+  --color-cream: #fdeef3;
+  --color-cream-soft: #fdf5f8;
+  --color-ink: #2d1520;
+  --color-ink-muted: #8a4a64;
+  --color-hairline: #f0c0d0;
+  --color-paper: #fffbfc;
 
   /* ── Typography ── */
   --font-display: var(--font-display), Georgia, serif;
   --font-body: var(--font-body), system-ui, sans-serif;
   --font-script: var(--font-script), 'Apple Chancery', cursive;
+  --font-handwrite: var(--font-handwrite), cursive;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
@@ -45,13 +54,12 @@ body {
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0.01em;
-  white-space: nowrap;
 }
 
 /* ── Section eyebrow label ── */
 .eyebrow {
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--color-ink-muted);
@@ -101,7 +109,7 @@ body {
   transition: border-color 0.2s ease;
 }
 .input-line::placeholder {
-  color: #a89e8a;
+  color: #c49aaa;
 }
 .input-line:focus {
   border-bottom-color: var(--color-ink);

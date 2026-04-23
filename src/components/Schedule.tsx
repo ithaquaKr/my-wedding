@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
 import { iconMap } from './Icons'
+import { staggerContainer, fadeUpChild } from '@/lib/animations'
 
 export function Schedule() {
   return (
@@ -46,16 +47,19 @@ export function Schedule() {
             style={{ left: '17%', right: '17%', transformOrigin: 'left' }}
           />
 
-          <div className="grid gap-12 md:grid-cols-3">
+          <motion.div
+            className="grid gap-12 md:grid-cols-3"
+            variants={staggerContainer}
+            whileInView="visible"
+            initial="hidden"
+            viewport={{ once: true }}
+          >
             {weddingConfig.schedule.map((item, i) => {
               const Icon = iconMap[item.icon]
               return (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.75, delay: i * 0.14, ease: [0.22, 1, 0.36, 1] }}
+                  variants={fadeUpChild}
                   className="flex flex-col items-center text-center"
                 >
                   {/* Icon with scale entrance */}
@@ -84,7 +88,7 @@ export function Schedule() {
                 </motion.div>
               )
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
