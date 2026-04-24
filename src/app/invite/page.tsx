@@ -3,13 +3,21 @@
 import { useState } from 'react'
 import { weddingConfig } from '@/config/wedding'
 
+type Side = 'groom' | 'bride'
+
+const SIDE_OPTIONS: { value: Side; label: string; sub: string }[] = [
+  { value: 'groom', label: 'Bên nhà trai', sub: 'Khách của chú rể' },
+  { value: 'bride', label: 'Bên nhà gái', sub: 'Khách của cô dâu' },
+]
+
 export default function InvitePage() {
   const [name, setName] = useState('')
+  const [side, setSide] = useState<Side>('groom')
   const [copied, setCopied] = useState(false)
 
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
   const generatedUrl = name.trim()
-    ? `${baseUrl}/?to=${encodeURIComponent(name.trim())}`
+    ? `${baseUrl}/?to=${encodeURIComponent(name.trim())}&side=${side}`
     : ''
 
   const handleCopy = async () => {
@@ -44,12 +52,41 @@ export default function InvitePage() {
           <div className="flex-1 h-px bg-[var(--color-hairline)]" />
         </div>
 
-        {/* Input */}
+        {/* Side selector */}
+        <div className="mb-8">
+          <p className="eyebrow block mb-3">Phía khách mời</p>
+          <div className="grid grid-cols-2 gap-3">
+            {SIDE_OPTIONS.map((opt) => {
+              const active = side === opt.value
+              return (
+                <button
+                  key={opt.value}
+                  onClick={() => setSide(opt.value)}
+                  className="flex flex-col items-center gap-1 py-4 px-3 border transition-colors duration-200 cursor-pointer"
+                  style={{
+                    borderColor: active ? 'var(--color-ink)' : 'var(--color-hairline)',
+                    background: active ? 'var(--color-ink)' : 'transparent',
+                    color: active ? 'var(--color-cream)' : 'var(--color-ink)',
+                  }}
+                >
+                  <span className="text-[11px] tracking-[0.22em] uppercase font-body font-medium">
+                    {opt.label}
+                  </span>
+                  <span
+                    className="text-[10px] tracking-[0.06em]"
+                    style={{ color: active ? 'rgba(253,238,243,0.7)' : 'var(--color-ink-muted)' }}
+                  >
+                    {opt.sub}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Name input */}
         <div className="mb-6">
-          <label
-            htmlFor="guest-name"
-            className="eyebrow block mb-3"
-          >
+          <label htmlFor="guest-name" className="eyebrow block mb-3">
             Tên người nhận
           </label>
           <input

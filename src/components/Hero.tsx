@@ -52,7 +52,7 @@ export function Hero() {
           fill
           priority
           className="object-cover"
-          style={{ filter: 'grayscale(0.55) contrast(1.05) brightness(0.75) sepia(0.25) hue-rotate(300deg)' }}
+          style={{ filter: 'grayscale(0.22) contrast(1.08) brightness(0.72) saturate(0.88)' }}
         />
       </motion.div>
 
@@ -145,6 +145,12 @@ export function Hero() {
           <Countdown dark delay={2.8} />
         </div>
       </motion.div>
+
+      {/* Bottom fade into GuestLetter */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48 z-[3] pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, transparent, var(--color-ink))' }}
+      />
 
       {/* Scroll cue — scanning line */}
       <motion.div

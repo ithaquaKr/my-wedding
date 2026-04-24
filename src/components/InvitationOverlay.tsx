@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
+import { useVenue } from '@/components/VenueProvider'
 
 const SESSION_KEY = 'invitation-dismissed'
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
@@ -48,6 +49,7 @@ const NAME = {
 export function InvitationOverlay() {
   const searchParams = useSearchParams()
   const guestName = searchParams.get('to') ?? ''
+  const venue = useVenue()
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -138,7 +140,7 @@ export function InvitationOverlay() {
                 {formatDate(weddingConfig.weddingDate)}
               </p>
               <p className="text-[10px] text-[var(--color-ink-muted)] tracking-[0.12em]">
-                {weddingConfig.venue.name}
+                {venue.name}
               </p>
             </motion.div>
           </motion.div>

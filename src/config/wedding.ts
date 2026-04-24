@@ -32,8 +32,8 @@ export type StoryMilestone = {
   date: string
   title: string
   description: string
-  /** Path under /public, or null for none */
-  photo: string | null
+  /** 1–4 image paths under /public. First is the featured (large) photo. */
+  photos: string[]
 }
 
 export type ScheduleItem = {
@@ -192,21 +192,34 @@ export const weddingConfig: WeddingConfig = {
       title: 'Lần đầu gặp nhau',
       description:
         'Một buổi chiều mùa thu Hà Nội, chúng tôi tình cờ gặp nhau tại một quán cà phê nhỏ trên phố cổ. Không ai ngờ rằng đó là khởi đầu của một câu chuyện dài.',
-      photo: '/images/story-1.jpg',
+      photos: [
+        '/images/story-1.jpg',
+        '/images/story-1b.jpg',
+        '/images/story-1c.jpg',
+      ],
     },
     {
       date: 'Tháng 02, 2023',
       title: 'Anh cầu hôn em',
       description:
         'Dưới ánh đèn của thành phố về đêm, anh quỳ xuống và hỏi câu hỏi quan trọng nhất. Em đã khóc, và rồi gật đầu.',
-      photo: '/images/story-2.jpg',
+      photos: [
+        '/images/story-2.jpg',
+        '/images/story-2b.jpg',
+        '/images/story-2c.jpg',
+        '/images/story-2d.jpg',
+      ],
     },
     {
       date: 'Tháng 05, 2026',
       title: 'Ngày chúng tôi về một nhà',
       description:
         'Sau nhiều năm yêu nhau, chúng tôi sẽ chính thức bước vào một chương mới của cuộc đời, cùng nhau xây dựng tổ ấm.',
-      photo: '/images/story-3.jpg',
+      photos: [
+        '/images/story-3.jpg',
+        '/images/story-3b.jpg',
+        '/images/story-3c.jpg',
+      ],
     },
   ],
 

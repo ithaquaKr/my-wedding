@@ -5,13 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const SECTIONS = [
   { id: 'hero',     label: 'Trang chủ' },
+  { id: 'letter',   label: 'Thư ngỏ' },
   { id: 'story',    label: 'Câu chuyện' },
   { id: 'wedding',  label: 'Lễ cưới' },
-  { id: 'schedule', label: 'Lịch trình' },
   { id: 'venue',    label: 'Địa điểm' },
   { id: 'travel',   label: 'Lưu trú' },
   { id: 'registry', label: 'Quà cưới' },
-  { id: 'letter',   label: 'Thư ngỏ' },
   { id: 'gallery',  label: 'Album' },
 ]
 

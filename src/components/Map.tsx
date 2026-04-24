@@ -1,10 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { weddingConfig } from '@/config/wedding'
+import { useVenue } from '@/components/VenueProvider'
 
 export function Map() {
-  const venue = weddingConfig.venue
+  const venue = useVenue()
 
   return (
     <section

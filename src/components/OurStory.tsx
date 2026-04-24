@@ -1,14 +1,81 @@
 'use client'
 
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
 import { staggerContainer, fadeUpChild } from '@/lib/animations'
+import { Lightbox } from '@/components/Lightbox'
+
+// ─── Photo Collage ────────────────────────────────────────────────────────────
+
+interface CollageProps {
+  photos: string[]
+  startIndex: number          // global index offset in allPhotos flat array
+  onOpen: (globalIndex: number) => void
+}
+
+function PhotoCollage({ photos, startIndex, onOpen }: CollageProps) {
+  const count = Math.min(photos.length, 4)
+
+  const photoButton = (src: string, localIdx: number, style: React.CSSProperties) => (
+    <motion.button
+      key={localIdx}
+      type="button"
+      aria-label={`Xem ảnh ${localIdx + 1}`}
+      onClick={() => onOpen(startIndex + localIdx)}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.8, delay: localIdx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className="editorial-photo group cursor-pointer relative overflow-hidden"
+      style={style}
+    >
+      <Image
+        src={src}
+        alt={`Ảnh câu chuyện ${startIndex + localIdx + 1}`}
+        fill
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        sizes="(max-width: 768px) 50vw, 25vw"
+      />
+      {/* Hover overlay */}
+      <div className="absolute inset-0 bg-[var(--color-ink)] opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none" />
+    </motion.button>
+  )
+
+  if (count <= 3) {
+    // Col 1: featured stretches full height | Col 2: 2 stacked photos
+    return (
+      <div className="grid grid-cols-2 gap-1.5">
+        {photos.slice(0, 3).map((src, i) =>
+          photoButton(src, i, i === 0
+            ? { gridRow: '1 / 3', minHeight: '100%' }
+            : { aspectRatio: '4/3' }
+          )
+        )}
+      </div>
+    )
+  }
+
+  // 4 photos: featured large left (spans 3 rows), 3 smaller right
+  return (
+    <div
+      className="grid gap-1.5"
+      style={{ gridTemplateColumns: '3fr 2fr', gridTemplateRows: 'auto auto auto' }}
+    >
+      {photoButton(photos[0], 0, { gridRow: '1 / 4', minHeight: '100%' })}
+      {photos.slice(1, 4).map((src, i) =>
+        photoButton(src, i + 1, { aspectRatio: i === 1 ? '3/2' : '4/3' })
+      )}
+    </div>
+  )
+}
+
+// ─── Our Story section ────────────────────────────────────────────────────────
 
 export function OurStory() {
-  const sectionRef = useRef<HTMLElement>(null)
   const milestonesRef = useRef<HTMLDivElement>(null)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const { scrollYProgress } = useScroll({
     target: milestonesRef,
@@ -16,9 +83,16 @@ export function OurStory() {
   })
   const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1])
 
+  // Flat array of all story photos for lightbox navigation
+  const allPhotos = weddingConfig.story.flatMap((m) => m.photos)
+
+  // Cumulative start index for each milestone in the flat allPhotos array
+  const startIndices = weddingConfig.story.map((_, i) =>
+    weddingConfig.story.slice(0, i).reduce((sum, m) => sum + m.photos.length, 0)
+  )
+
   return (
     <section
-      ref={sectionRef}
       id="story"
       className="relative bg-[var(--color-cream)] py-28 md:py-36 px-6"
     >
@@ -29,9 +103,10 @@ export function OurStory() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-[clamp(3rem,9vw,7rem)] leading-[0.9] tracking-tight text-[var(--color-ink)]"
+          className="font-display text-[clamp(2.2rem,9vw,7rem)] leading-[0.95] tracking-tight text-[var(--color-ink)]"
         >
-          CÂU CHUYỆN{' '}
+          CÂU CHUYỆN
+          <br />
           <span className="italic font-normal">CỦA CHÚNG TÔI</span>
         </motion.h2>
 
@@ -56,9 +131,9 @@ export function OurStory() {
           style={{ transformOrigin: 'left' }}
         />
 
-        {/* Milestones with scroll-linked timeline line */}
+        {/* Milestones */}
         <div ref={milestonesRef} className="relative mt-16">
-          {/* Drawing timeline line — desktop only */}
+          {/* Scroll-linked timeline line — desktop only */}
           <div className="absolute left-0 top-2 bottom-2 hidden md:block" style={{ width: '1px' }}>
             <div className="h-full w-full bg-[var(--color-hairline)]" />
             <motion.div
@@ -68,60 +143,57 @@ export function OurStory() {
           </div>
 
           <motion.div
-            className="space-y-20 md:space-y-28 md:pl-14"
+            className="space-y-24 md:space-y-32 md:pl-14"
             variants={staggerContainer}
             whileInView="visible"
             initial="hidden"
             viewport={{ once: true }}
           >
-            {weddingConfig.story.map((m, i) => {
-              const reversed = i % 2 === 1
-              return (
-                <motion.div
-                  key={i}
-                  variants={fadeUpChild}
-                  className="grid items-center gap-8 md:gap-16 md:grid-cols-12"
-                >
-                  {/* Photo — clip-path wipe reveal */}
-                  {m.photo && (
-                    <motion.div
-                      initial={{ clipPath: 'inset(0 0 100% 0)' }}
-                      whileInView={{ clipPath: 'inset(0 0 0% 0)' }}
-                      viewport={{ once: true, margin: '-60px' }}
-                      transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
-                      className={`md:col-span-5 ${reversed ? 'md:col-start-7' : ''}`}
-                    >
-                      <div className="editorial-photo aspect-[4/5]">
-                        <Image src={m.photo} alt={m.title} width={800} height={1000} />
-                      </div>
-                    </motion.div>
-                  )}
+            {weddingConfig.story.map((m, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUpChild}
+                className="grid gap-8 md:gap-12 md:grid-cols-12 items-start"
+              >
+                {/* Text — narrow column */}
+                <div className="md:col-span-3">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-ink-muted)] shrink-0" />
+                    <p className="eyebrow">{m.date}</p>
+                  </div>
+                  <h3 className="font-display text-2xl md:text-3xl text-[var(--color-ink)]">
+                    {m.title}
+                  </h3>
+                  <p className="mt-4 text-[var(--color-ink-muted)] leading-relaxed text-sm md:text-base">
+                    {m.description}
+                  </p>
+                </div>
 
-                  {/* Text */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                    className={`md:col-span-6 ${reversed ? 'md:col-start-1 md:row-start-1' : ''}`}
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-ink-muted)] shrink-0" />
-                      <p className="eyebrow">{m.date}</p>
-                    </div>
-                    <h3 className="font-display text-3xl md:text-4xl text-[var(--color-ink)]">
-                      {m.title}
-                    </h3>
-                    <p className="mt-5 text-[var(--color-ink-muted)] leading-relaxed">
-                      {m.description}
-                    </p>
-                  </motion.div>
-                </motion.div>
-              )
-            })}
+                {/* Photo collage — wide column */}
+                <div className="md:col-span-9">
+                  <PhotoCollage
+                    photos={m.photos}
+                    startIndex={startIndices[i]}
+                    onOpen={setLightboxIndex}
+                  />
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>
+
+      <Lightbox
+        images={allPhotos}
+        currentIndex={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onPrev={() => setLightboxIndex((idx) =>
+          idx === null ? null : (idx - 1 + allPhotos.length) % allPhotos.length
+        )}
+        onNext={() => setLightboxIndex((idx) =>
+          idx === null ? null : (idx + 1) % allPhotos.length
+        )}
+      />
     </section>
   )
 }

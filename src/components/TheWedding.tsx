@@ -1,136 +1,105 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
+import { iconMap } from './Icons'
 import { staggerContainer, fadeUpChild } from '@/lib/animations'
 
-type Panel = {
-  key: string
-  label: string
-  body: React.ReactNode
-}
-
 export function TheWedding() {
-  const { ceremony, reception, dressCode } = weddingConfig
-  const panels: Panel[] = [
-    {
-      key: 'ceremony',
-      label: ceremony.title,
-      body: (
-        <>
-          <p className="font-display text-xl md:text-2xl italic mb-2">
-            {ceremony.time}
-          </p>
-          <p className="text-[var(--color-ink-muted)] leading-relaxed">
-            {ceremony.description}
-          </p>
-        </>
-      ),
-    },
-    {
-      key: 'reception',
-      label: reception.title,
-      body: (
-        <>
-          <p className="font-display text-xl md:text-2xl italic mb-2">
-            {reception.time}
-          </p>
-          <p className="text-[var(--color-ink-muted)] leading-relaxed">
-            {reception.description}
-          </p>
-        </>
-      ),
-    },
-    {
-      key: 'dress',
-      label: dressCode.title,
-      body: (
-        <>
-          <p className="font-display text-xl md:text-2xl italic mb-2">
-            {dressCode.palette}
-          </p>
-          <p className="text-[var(--color-ink-muted)] leading-relaxed">
-            {dressCode.note}
-          </p>
-        </>
-      ),
-    },
-  ]
-
-  const [open, setOpen] = useState<string>('ceremony')
-
   return (
     <section
       id="wedding"
-      className="bg-[var(--color-cream)] py-28 md:py-36 px-6"
+      className="bg-[var(--color-cream-soft)] py-28 md:py-36 px-6"
     >
-      <div className="mx-auto max-w-5xl text-center">
+      <div className="mx-auto max-w-6xl">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center"
         >
-          <p className="eyebrow">Lễ cưới</p>
+          <p className="eyebrow tracking-[0.4em]">10 . 05 . 2026</p>
           <h2 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] mt-4 leading-[0.95]">
-            CÙNG CHÚNG TÔI BƯỚC VÀO
+            NGÀY TRỌNG ĐẠI
             <br />
-            <span className="italic font-normal">chương mới của cuộc đời</span>
+            <span className="italic font-normal">khoảnh khắc chúng ta cùng chung vui</span>
           </h2>
-          <p className="mt-6 text-[var(--color-ink-muted)] max-w-xl mx-auto">
-            Chúng tôi sẽ không thể nói &ldquo;đồng ý&rdquo; nếu thiếu bạn ở bên cạnh.
-          </p>
         </motion.div>
 
-        <motion.div
-          className="mt-14 max-w-2xl mx-auto text-left"
-          variants={staggerContainer}
-          whileInView="visible"
-          initial="hidden"
+        <motion.hr
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
-        >
-          {panels.map((p) => {
-            const isOpen = open === p.key
-            return (
-              <motion.div
-                key={p.key}
-                variants={fadeUpChild}
-                className="border-t border-[var(--color-hairline)] last:border-b"
-              >
-                <button
-                  onClick={() => setOpen(isOpen ? '' : p.key)}
-                  className="w-full flex items-center justify-between py-6 cursor-pointer"
-                  aria-expanded={isOpen}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="hairline mt-14 mb-16"
+          style={{ transformOrigin: 'left' }}
+        />
+
+        {/* Timeline grid */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Horizontal connector — desktop only */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute hidden md:block h-px bg-[var(--color-hairline)] top-8"
+            style={{ left: '17%', right: '17%', transformOrigin: 'left' }}
+          />
+
+          <motion.div
+            className="grid gap-14 md:grid-cols-3"
+            variants={staggerContainer}
+            whileInView="visible"
+            initial="hidden"
+            viewport={{ once: true }}
+          >
+            {weddingConfig.schedule.map((item, i) => {
+              const Icon = iconMap[item.icon]
+              return (
+                <motion.div
+                  key={i}
+                  variants={fadeUpChild}
+                  className="flex flex-col items-center text-center"
                 >
-                  <span className="font-display text-2xl md:text-3xl text-[var(--color-ink)]">
-                    {p.label}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="text-2xl text-[var(--color-ink)] transition-transform duration-300"
-                    style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}
+                  {/* Icon */}
+                  <motion.div
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.6,
+                      delay: 0.2 + i * 0.14,
+                      type: 'spring',
+                      stiffness: 180,
+                    }}
+                    className="relative z-10 bg-[var(--color-cream-soft)] px-3"
                   >
-                    +
-                  </span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: 'easeInOut' }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pb-6 pr-8">{p.body}</div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            )
-          })}
-        </motion.div>
+                    <Icon className="w-14 h-14 text-[var(--color-ink)]" />
+                  </motion.div>
+
+                  {/* Time */}
+                  <p className="eyebrow mt-7 tracking-[0.32em]">{item.time}</p>
+
+                  {/* Title */}
+                  <h3 className="font-display text-2xl md:text-[1.75rem] mt-3 text-[var(--color-ink)] leading-tight">
+                    {item.title}
+                  </h3>
+
+                  {/* Hairline ornament */}
+                  <div className="w-8 h-px bg-[var(--color-hairline)] my-4" />
+
+                  {/* Description */}
+                  <p className="text-sm text-[var(--color-ink-muted)] leading-relaxed max-w-[22ch]">
+                    {item.description}
+                  </p>
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   )

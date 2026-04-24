@@ -3,37 +3,47 @@
 import { motion } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
 
+const EASE = [0.22, 1, 0.36, 1] as const
+
 export function GuestLetter() {
-  const initial = (char: string) => char.charAt(0)
+  const groomInitial = weddingConfig.groom.charAt(0)
+  const brideInitial = weddingConfig.bride.charAt(0)
 
   return (
-    <section id="letter" className="bg-[var(--color-cream-soft)] py-28 md:py-36 px-6">
-      <div className="mx-auto max-w-3xl">
+    <section
+      id="letter"
+      className="relative bg-[var(--color-ink)] py-28 md:py-40 px-6 overflow-hidden"
+    >
+      {/* Subtle grain — matches hero texture */}
+      <div className="absolute inset-0 grain-overlay pointer-events-none opacity-60" />
+
+      <div className="relative mx-auto max-w-2xl text-center">
 
         {/* Eyebrow */}
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="eyebrow text-center"
+          transition={{ duration: 0.8, ease: EASE }}
+          className="eyebrow"
+          style={{ color: 'rgba(253,238,243,0.45)' }}
         >
           Thư ngỏ
         </motion.p>
 
-        {/* Heading */}
+        {/* Script heading */}
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.1 }}
-          className="font-display text-center text-[clamp(2.2rem,6vw,5rem)] leading-[0.95] mt-5"
+          transition={{ duration: 1, delay: 0.1, ease: EASE }}
+          className="font-script mt-5 leading-[1.1] text-[var(--color-cream)]"
+          style={{ fontSize: 'clamp(3rem,10vw,6rem)' }}
         >
-          Kính gửi{' '}
-          <span className="italic font-normal">những người thân yêu</span>
+          Kính gửi bạn
         </motion.h2>
 
-        {/* Monogram divider */}
+        {/* Hairline + monogram */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -45,70 +55,85 @@ export function GuestLetter() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="hairline flex-1"
-            style={{ transformOrigin: 'right' }}
+            transition={{ duration: 1.2, delay: 0.35, ease: EASE }}
+            className="flex-1 border-0 h-px"
+            style={{ background: 'rgba(253,238,243,0.18)', transformOrigin: 'right' }}
           />
-          <span className="font-script text-2xl text-[var(--color-ink-muted)] shrink-0">
-            {initial(weddingConfig.groom)} &amp; {initial(weddingConfig.bride)}
+          <span
+            className="font-script shrink-0"
+            style={{ fontSize: '1.5rem', color: 'rgba(253,238,243,0.35)' }}
+          >
+            {groomInitial} &amp; {brideInitial}
           </span>
           <motion.hr
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="hairline flex-1"
-            style={{ transformOrigin: 'left' }}
+            transition={{ duration: 1.2, delay: 0.4, ease: EASE }}
+            className="flex-1 border-0 h-px"
+            style={{ background: 'rgba(253,238,243,0.18)', transformOrigin: 'left' }}
           />
         </motion.div>
 
-        {/* Paper card */}
+        {/* Letter body */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.45 }}
-          className="mt-10 bg-[var(--color-paper)] border border-[var(--color-hairline)] px-8 py-10 md:px-14 md:py-14"
-          style={{ boxShadow: '0 2px 24px 0 rgba(45,21,32,0.06)' }}
+          transition={{ duration: 1, delay: 0.45, ease: EASE }}
+          className="mt-12 space-y-6 text-left"
+          style={{
+            fontFamily: 'var(--font-handwrite)',
+            fontSize: 'clamp(1.1rem, 3.2vw, 1.35rem)',
+            lineHeight: '2',
+            color: 'rgba(253,238,243,0.82)',
+          }}
         >
-          {/* Letter body */}
-          <div
-            className="space-y-5 text-[var(--color-ink)]"
-            style={{
-              fontFamily: 'var(--font-handwrite)',
-              fontSize: 'clamp(1.15rem, 3.5vw, 1.4rem)',
-              lineHeight: '2',
-              fontWeight: 500,
-            }}
-          >
-            <p>Bạn thân mến,</p>
-            <p>
-              Có những khoảnh khắc trong cuộc đời mà ta muốn được chia sẻ cùng tất cả những người mình
-              yêu thương nhất. Và đám cưới của chúng tôi chính là một trong những khoảnh khắc như vậy.
-            </p>
-            <p>
-              Chúng tôi đã đồng hành cùng nhau qua những ngày vui, những lúc khó khăn, và cả những
-              khoảnh khắc bình dị nhất. Hôm nay, chúng tôi chọn nhau — không phải vì hoàn cảnh hay sự
-              tình cờ, mà vì chúng tôi hiểu rằng không ai khác có thể làm cho nhau trọn vẹn hơn.
-            </p>
-            <p>
-              Sự hiện diện của bạn trong ngày trọng đại này là món quà vô giá nhất mà bạn có thể trao
-              cho chúng tôi. Chúng tôi mong được ôm bạn, cười cùng bạn, và ghi lại khoảnh khắc ấy mãi
-              trong ký ức.
-            </p>
-            <p>Hẹn gặp bạn vào ngày 10 tháng 5 năm 2026.</p>
-          </div>
+          <p>Bạn thân mến,</p>
+          <p>
+            Có những khoảnh khắc trong cuộc đời mà ta muốn được chia sẻ cùng tất cả những người
+            mình yêu thương nhất. Và đám cưới của chúng tôi chính là một trong những khoảnh khắc
+            như vậy.
+          </p>
+          <p>
+            Chúng tôi đã đồng hành cùng nhau qua những ngày vui, những lúc khó khăn, và cả những
+            khoảnh khắc bình dị nhất. Hôm nay, chúng tôi chọn nhau — không phải vì hoàn cảnh hay
+            sự tình cờ, mà vì chúng tôi hiểu rằng không ai khác có thể làm cho nhau trọn vẹn hơn.
+          </p>
+          <p>
+            Sự hiện diện của bạn trong ngày trọng đại này là món quà vô giá nhất mà bạn có thể
+            trao cho chúng tôi. Chúng tôi mong được ôm bạn, cười cùng bạn, và ghi lại khoảnh khắc
+            ấy mãi trong ký ức.
+          </p>
+          <p>Hẹn gặp bạn vào ngày 10 tháng 5 năm 2026.</p>
+        </motion.div>
 
-          {/* Signature */}
-          <div className="mt-10 flex flex-col items-end gap-1 text-right">
-            <p className="eyebrow whitespace-nowrap" style={{ letterSpacing: '0.14em' }}>Với tất cả tình yêu thương,</p>
-            <p
-              className="font-script text-[var(--color-ink)]"
-              style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)' }}
-            >
-              {weddingConfig.groom} &amp; {weddingConfig.bride}
-            </p>
-          </div>
+        {/* Signature */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: 0.6, ease: EASE }}
+          className="mt-12 flex flex-col items-end gap-1 text-right"
+        >
+          <p
+            className="eyebrow whitespace-nowrap"
+            style={{ color: 'rgba(253,238,243,0.4)', letterSpacing: '0.14em' }}
+          >
+            Với tất cả tình yêu thương,
+          </p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/signature.png"
+            alt={`Chữ ký ${weddingConfig.groom} & ${weddingConfig.bride}`}
+            style={{
+              display: 'block',
+              width: 'clamp(200px, 55vw, 340px)',
+              filter: 'invert(1) brightness(1.5)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 92%)',
+              maskImage: 'linear-gradient(to bottom, black 70%, transparent 92%)',
+            }}
+          />
         </motion.div>
 
       </div>
