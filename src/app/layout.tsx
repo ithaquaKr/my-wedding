@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Inter, Corinthia, Dancing_Script, Great_Vibes } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { weddingConfig } from '@/config/wedding'
 
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="vi">
       <body className={`${playfair.variable} ${inter.variable} ${corinthia.variable} ${dancingScript.variable} ${greatVibes.variable} antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   )
