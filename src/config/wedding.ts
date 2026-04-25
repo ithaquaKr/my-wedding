@@ -124,21 +124,21 @@ export type WeddingConfig = {
 
 export const groomVenue: Venue = {
   label: 'Tiệc cưới nhà trai',
-  name: '[TÊN TRUNG TÂM TIỆC CƯỚI - NHÀ TRAI]',
-  address: '[ĐỊA CHỈ ĐẦY ĐỦ - NHÀ TRAI]',
+  name: 'Nhà Văn hoá thôn Thuỵ Hương',
+  address: 'Xã Nội Bài, TP. Hà Nội',
   mapEmbedUrl:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.0!2d105.8542!3d21.0285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSGFub2k!5e0!3m2!1svi!2s!4v0',
-  directionsUrl: 'https://maps.google.com/?q=Hanoi',
-  receptionAt: '2026-05-10T11:00:00+07:00',
+    'https://maps.google.com/maps?q=Nh%C3%A0+V%C4%83n+H%C3%B3a+Th%C3%B4n+Th%E1%BB%A5y+H%C6%B0%C6%A1ng,+N%E1%BB%99i+B%C3%A0i,+H%C3%A0+N%E1%BB%99i&output=embed',
+  directionsUrl: 'https://maps.app.goo.gl/kTHTAjnzHyGUS5SP6',
+  receptionAt: '2026-05-10T16:00:00+07:00',
 }
 
 export const brideVenue: Venue = {
   label: 'Tiệc cưới nhà gái',
-  name: '[TÊN TRUNG TÂM TIỆC CƯỚI - NHÀ GÁI]',
-  address: '[ĐỊA CHỈ ĐẦY ĐỦ - NHÀ GÁI]',
+  name: 'Tại tư gia nhà gái',
+  address: 'TP. Hà Nội',
   mapEmbedUrl:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.0!2d105.8542!3d21.0285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSGFub2k!5e0!3m2!1svi!2s!4v0',
-  directionsUrl: 'https://maps.google.com/?q=Hanoi',
+    'https://maps.google.com/maps?q=21.2053611,105.8487778&output=embed',
+  directionsUrl: 'https://maps.app.goo.gl/PDD2UGCZg1MCztGV7',
   receptionAt: '2026-05-10T17:00:00+07:00',
 }
 
@@ -225,13 +225,13 @@ export const weddingConfig: WeddingConfig = {
 
   ceremony: {
     title: 'Lễ Thành Hôn',
-    time: '10:00 - 10/05/2026',
+    time: '15:00 - 10/05/2026',
     description:
       'Trân trọng kính mời quý khách tới dự lễ thành hôn và chứng kiến khoảnh khắc trọng đại nhất trong cuộc đời chúng tôi.',
   },
   reception: {
-    title: 'Tiệc Chiêu Đãi',
-    time: '11:30 - 10/05/2026',
+    title: 'Tiệc Cưới',
+    time: '16:00 - 10/05/2026',
     description:
       'Tiệc cưới sẽ được tổ chức ngay sau lễ thành hôn. Rất mong nhận được sự hiện diện của quý khách để chung vui cùng gia đình.',
   },
@@ -244,21 +244,15 @@ export const weddingConfig: WeddingConfig = {
   schedule: [
     {
       icon: 'rings',
-      time: '10:00',
+      time: '15:00',
       title: 'Lễ thành hôn',
       description: 'Nghi lễ trao nhẫn và lời thề ước trước sự chứng kiến của hai gia đình.',
     },
     {
       icon: 'plate',
-      time: '11:30',
-      title: 'Tiệc chiêu đãi',
+      time: '16:00',
+      title: 'Tiệc cưới',
       description: 'Bữa tiệc ấm cúng cùng gia đình, bạn bè và những người thân thương nhất.',
-    },
-    {
-      icon: 'music',
-      time: '13:30',
-      title: 'Tiệc trà & lưu niệm',
-      description: 'Cùng nhau lưu giữ những khoảnh khắc đáng nhớ tại khu vực chụp hình kỉ niệm.',
     },
   ],
 

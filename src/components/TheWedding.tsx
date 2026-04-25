@@ -38,7 +38,7 @@ export function TheWedding() {
         />
 
         {/* Timeline grid */}
-        <div className="relative max-w-5xl mx-auto">
+        <div className="relative max-w-2xl mx-auto">
           {/* Horizontal connector — desktop only */}
           <motion.div
             initial={{ scaleX: 0 }}
@@ -46,11 +46,11 @@ export function TheWedding() {
             viewport={{ once: true }}
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
             className="absolute hidden md:block h-px bg-[var(--color-hairline)] top-8"
-            style={{ left: '17%', right: '17%', transformOrigin: 'left' }}
+            style={{ left: '25%', right: '25%', transformOrigin: 'left' }}
           />
 
           <motion.div
-            className="grid gap-14 md:grid-cols-3"
+            className="grid gap-14 md:grid-cols-2"
             variants={staggerContainer}
             whileInView="visible"
             initial="hidden"

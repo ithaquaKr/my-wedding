@@ -5,7 +5,7 @@ import { weddingConfig } from '@/config/wedding'
 import { staggerContainer, fadeUpChild } from '@/lib/animations'
 
 export function TravelStay() {
-  const { airports, hotels, transportation } = weddingConfig.travel
+  const { airports, transportation } = weddingConfig.travel
 
   return (
     <section
@@ -26,7 +26,7 @@ export function TravelStay() {
         <hr className="hairline mt-14 mb-14" />
 
         <motion.div
-          className="grid gap-14 md:grid-cols-3 text-left"
+          className="grid gap-14 md:grid-cols-2 text-left max-w-2xl mx-auto"
           variants={staggerContainer}
           whileInView="visible"
           initial="hidden"
@@ -39,36 +39,6 @@ export function TravelStay() {
               {airports.map((a, i) => (
                 <li key={i} className="text-[var(--color-ink-muted)] leading-relaxed">
                   {a}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Hotels */}
-          <motion.div variants={fadeUpChild}>
-            <p className="eyebrow mb-5">Khách sạn gợi ý</p>
-            <ul className="space-y-5">
-              {hotels.map((h, i) => (
-                <li key={i}>
-                  <p className="font-display text-xl text-[var(--color-ink)]">
-                    {h.name}
-                  </p>
-                  <p className="text-sm text-[var(--color-ink-muted)] mt-1">
-                    {h.distance}
-                  </p>
-                  <p className="text-sm text-[var(--color-ink-muted)]">
-                    {h.priceRange}
-                  </p>
-                  {h.url && (
-                    <a
-                      href={h.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs uppercase tracking-[0.2em] text-[var(--color-ink)] underline mt-1 inline-block"
-                    >
-                      Đặt phòng
-                    </a>
-                  )}
                 </li>
               ))}
             </ul>

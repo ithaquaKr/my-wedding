@@ -1,11 +1,15 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useSearchParams } from 'next/navigation'
 import { weddingConfig } from '@/config/wedding'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
 export function GuestLetter() {
+  const searchParams = useSearchParams()
+  const guestName = searchParams.get('to')
+
   const groomInitial = weddingConfig.groom.charAt(0)
   const brideInitial = weddingConfig.bride.charAt(0)
 
@@ -40,7 +44,7 @@ export function GuestLetter() {
           className="font-script mt-5 leading-[1.1] text-[var(--color-cream)]"
           style={{ fontSize: 'clamp(3rem,10vw,6rem)' }}
         >
-          Kính gửi bạn
+          {guestName ? `Gửi bạn, ${guestName}` : 'Gửi bạn'}
         </motion.h2>
 
         {/* Hairline + monogram */}
