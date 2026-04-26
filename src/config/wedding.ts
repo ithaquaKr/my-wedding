@@ -188,10 +188,10 @@ export const weddingConfig: WeddingConfig = {
 
   story: [
     {
-      date: 'Tháng 09, 2020',
-      title: 'Lần đầu gặp nhau',
+      date: 'Tháng 06, 2025',
+      title: 'Lần đầu gặp gỡ',
       description:
-        'Một buổi chiều mùa thu Hà Nội, chúng tôi tình cờ gặp nhau tại một quán cà phê nhỏ trên phố cổ. Không ai ngờ rằng đó là khởi đầu của một câu chuyện dài.',
+        'Một buổi gặp mặt từ hai con người vốn không chung một thế giới, chúng tôi gặp nhau và bắt đầu một câu chuyện chưa có hồi kết.',
       photos: [
         '/images/story-1.jpg',
         '/images/story-1b.jpg',
@@ -199,10 +199,10 @@ export const weddingConfig: WeddingConfig = {
       ],
     },
     {
-      date: 'Tháng 02, 2023',
-      title: 'Anh cầu hôn em',
+      date: '2025 – 2026',
+      title: 'Hành trình cùng nhau',
       description:
-        'Dưới ánh đèn của thành phố về đêm, anh quỳ xuống và hỏi câu hỏi quan trọng nhất. Em đã khóc, và rồi gật đầu.',
+        'Có những chuyến đi xa, những lần dỗi nhau vì chuyện chẳng đâu, những buổi cãi vã rồi lại làm lành. Có cả nước mắt lẫn tiếng cười — và giữa tất cả những điều đó, chúng tôi vẫn chọn nhau mỗi ngày.',
       photos: [
         '/images/story-2.jpg',
         '/images/story-2b.jpg',
@@ -211,14 +211,25 @@ export const weddingConfig: WeddingConfig = {
       ],
     },
     {
-      date: 'Tháng 05, 2026',
-      title: 'Ngày chúng tôi về một nhà',
+      date: '18 / 04 / 2026',
+      title: 'Lời cầu hôn',
       description:
-        'Sau nhiều năm yêu nhau, chúng tôi sẽ chính thức bước vào một chương mới của cuộc đời, cùng nhau xây dựng tổ ấm.',
+        'Chẳng có gì hoành tráng, chỉ là anh hỏi một câu mà cả hai đã biết câu trả lời từ lâu. Em gật đầu. Vậy là đủ.',
       photos: [
         '/images/story-3.jpg',
         '/images/story-3b.jpg',
         '/images/story-3c.jpg',
+      ],
+    },
+    {
+      date: '10 / 05 / 2026',
+      title: 'Ngày chúng tôi về một nhà',
+      description:
+        'Chúng tôi chính thức bước vào một chương mới của cuộc đời, cùng nhau xây dựng tổ ấm.',
+      photos: [
+        '/images/story-1.jpg',
+        '/images/story-2.jpg',
+        '/images/story-3.jpg',
       ],
     },
   ],
@@ -284,17 +295,17 @@ export const weddingConfig: WeddingConfig = {
     items: [
       {
         label: 'Mừng cưới chú rể',
-        bankName: '[TÊN NGÂN HÀNG]',
-        accountName: '[CHỦ TÀI KHOẢN]',
-        accountNumber: '[SỐ TÀI KHOẢN]',
-        qrImage: '/images/qr-groom.png',
+        bankName: 'Techcombank',
+        accountName: 'NGUYEN TUAN HIEP',
+        accountNumber: '19033991835012',
+        qrImage: '/images/qr-groom-v2.jpg',
       },
       {
         label: 'Mừng cưới cô dâu',
-        bankName: '[TÊN NGÂN HÀNG]',
-        accountName: '[CHỦ TÀI KHOẢN]',
-        accountNumber: '[SỐ TÀI KHOẢN]',
-        qrImage: '/images/qr-bride.png',
+        bankName: 'BIDV - CN Ba Đình',
+        accountName: 'TRUONG KHANH LINH',
+        accountNumber: '1261169070',
+        qrImage: '/images/qr-bride.jpg',
       },
     ],
   },
