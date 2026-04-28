@@ -6,17 +6,6 @@ import { motion } from 'framer-motion'
 import { weddingConfig } from '@/config/wedding'
 import { Lightbox } from './Lightbox'
 
-// Explicit grid positions for editorial masonry layout (6 images)
-// Layout: [featured tall] [2 small] / [featured tall] [2 small] / [wide banner]
-const DESKTOP_POSITIONS = [
-  { gridColumn: '1', gridRow: '1 / 3' },
-  { gridColumn: '2', gridRow: '1' },
-  { gridColumn: '3', gridRow: '1' },
-  { gridColumn: '2', gridRow: '2' },
-  { gridColumn: '3', gridRow: '2' },
-  { gridColumn: '1 / 4', gridRow: '3' },
-]
-
 export function Gallery() {
   const [index, setIndex] = useState<number | null>(null)
   const images = weddingConfig.galleryImages
@@ -55,41 +44,37 @@ export function Gallery() {
           style={{ transformOrigin: 'left' }}
         />
 
-        {/* Desktop — editorial masonry grid */}
-        <div
-          className="hidden md:grid gap-3"
-          style={{
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gridTemplateRows: '260px 260px 200px',
-          }}
-        >
+        {/* Desktop — CSS masonry columns, natural image ratio */}
+        <div className="hidden md:block mx-auto" style={{ columns: 3, columnGap: '0.75rem', maxWidth: '960px' }}>
           {images.slice(0, 6).map((src, i) => (
             <motion.button
               key={i}
               type="button"
               onClick={() => setIndex(i)}
-              style={DESKTOP_POSITIONS[i]}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.8, delay: i * 0.07 }}
-              className="relative overflow-hidden group cursor-pointer"
+              className="relative overflow-hidden group cursor-pointer w-full block mb-3"
+              style={{ breakInside: 'avoid' }}
               aria-label={`Mở ảnh ${i + 1}`}
             >
               <Image
                 src={src}
                 alt={`Ảnh cưới ${i + 1}`}
-                fill
-                className="object-cover grayscale contrast-[1.05] transition-transform duration-700 ease-out group-hover:scale-105"
+                width={0}
+                height={0}
                 sizes="(max-width: 1280px) 33vw, 420px"
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+                className="transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-[var(--color-ink)] opacity-0 group-hover:opacity-15 transition-opacity duration-500" />
             </motion.button>
           ))}
         </div>
 
-        {/* Mobile — 2-column grid */}
-        <div className="md:hidden grid grid-cols-2 gap-3">
+        {/* Mobile — 2-column masonry */}
+        <div className="md:hidden" style={{ columns: 2, columnGap: '0.75rem' }}>
           {images.map((src, i) => (
             <motion.button
               key={i}
@@ -99,15 +84,18 @@ export function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
               transition={{ duration: 0.6, delay: (i % 2) * 0.06 }}
-              className="relative aspect-[3/4] overflow-hidden group cursor-pointer"
+              className="relative overflow-hidden group cursor-pointer w-full block mb-3"
+              style={{ breakInside: 'avoid' }}
               aria-label={`Mở ảnh ${i + 1}`}
             >
               <Image
                 src={src}
                 alt={`Ảnh cưới ${i + 1}`}
-                fill
-                className="object-cover grayscale contrast-[1.05]"
+                width={0}
+                height={0}
                 sizes="50vw"
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+                className="object-cover"
               />
             </motion.button>
           ))}

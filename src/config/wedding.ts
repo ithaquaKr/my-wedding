@@ -192,11 +192,7 @@ export const weddingConfig: WeddingConfig = {
       title: 'Lần đầu gặp gỡ',
       description:
         'Một buổi gặp mặt từ hai con người vốn không chung một thế giới, chúng tôi gặp nhau và bắt đầu một câu chuyện chưa có hồi kết.',
-      photos: [
-        '/images/story-1.jpg',
-        '/images/story-1b.jpg',
-        '/images/story-1c.jpg',
-      ],
+      photos: [],
     },
     {
       date: '2025 – 2026',
@@ -204,10 +200,10 @@ export const weddingConfig: WeddingConfig = {
       description:
         'Có những chuyến đi xa, những lần dỗi nhau vì chuyện chẳng đâu, những buổi cãi vã rồi lại làm lành. Có cả nước mắt lẫn tiếng cười — và giữa tất cả những điều đó, chúng tôi vẫn chọn nhau mỗi ngày.',
       photos: [
-        '/images/story-2.jpg',
-        '/images/story-2b.jpg',
-        '/images/story-2c.jpg',
-        '/images/story-2d.jpg',
+        '/images/use_story-2.JPG',
+        '/images/use_story-2b.jpeg',
+        '/images/use_story-2c.JPG',
+        '/images/use_story-2d.jpeg',
       ],
     },
     {
@@ -216,9 +212,9 @@ export const weddingConfig: WeddingConfig = {
       description:
         'Chẳng có gì hoành tráng, chỉ là anh hỏi một câu mà cả hai đã biết câu trả lời từ lâu. Em gật đầu. Vậy là đủ.',
       photos: [
-        '/images/story-3.jpg',
-        '/images/story-3b.jpg',
-        '/images/story-3c.jpg',
+        '/images/use_story-3.jpeg',
+        '/images/use_story-3b.png',
+        '/images/use_story-3c.jpeg',
       ],
     },
     {
@@ -227,9 +223,9 @@ export const weddingConfig: WeddingConfig = {
       description:
         'Chúng tôi chính thức bước vào một chương mới của cuộc đời, cùng nhau xây dựng tổ ấm.',
       photos: [
-        '/images/story-1.jpg',
-        '/images/story-2.jpg',
-        '/images/story-3.jpg',
+        '/images/use_story-4.jpg',
+        '/images/use_story-4b.jpg',
+        '/images/use_story-4c.jpg',
       ],
     },
   ],

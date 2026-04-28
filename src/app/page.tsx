@@ -2,7 +2,6 @@ import { Hero } from '@/components/Hero'
 import { OurStory } from '@/components/OurStory'
 import { TheWedding } from '@/components/TheWedding'
 import { Map } from '@/components/Map'
-import { TravelStay } from '@/components/TravelStay'
 import { GiftRegistry } from '@/components/GiftRegistry'
 import { GuestLetter } from '@/components/GuestLetter'
 import { Gallery } from '@/components/Gallery'
@@ -26,7 +25,6 @@ export default function Home() {
             <Divider className="py-6" />
             <TheWedding />
             <Map />
-            <TravelStay />
             <GiftRegistry />
             <Divider className="py-6" />
             <Gallery />

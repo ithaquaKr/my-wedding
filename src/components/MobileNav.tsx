@@ -45,7 +45,7 @@ export function MobileNav() {
           aria-label="Điều hướng di động"
         >
           <div
-            className="flex items-end justify-around px-2 pt-3"
+            className="flex items-center justify-around px-2 pt-3"
             style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
           >
             {MOBILE_SECTIONS.map(({ id, label }) => {
@@ -66,7 +66,7 @@ export function MobileNav() {
                     }}
                   />
                   <span
-                    className="text-[10px] tracking-[0.06em] uppercase font-body transition-colors duration-300 truncate"
+                    className="text-[11px] tracking-[0.06em] uppercase font-body transition-colors duration-300 truncate"
                     style={{
                       color: isActive ? 'var(--color-ink)' : 'var(--color-ink-muted)',
                     }}

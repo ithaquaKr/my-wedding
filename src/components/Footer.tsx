@@ -15,7 +15,8 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-5xl md:text-7xl tracking-wide"
+          className="font-display tracking-wide whitespace-nowrap"
+          style={{ fontSize: 'clamp(1.4rem, 5.5vw, 4.5rem)' }}
         >
           {weddingConfig.groom.toUpperCase()}{' '}
           <span className="italic font-normal">&amp;</span>{' '}

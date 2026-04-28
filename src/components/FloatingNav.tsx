@@ -9,7 +9,6 @@ const SECTIONS = [
   { id: 'story',    label: 'Câu chuyện' },
   { id: 'wedding',  label: 'Lễ cưới' },
   { id: 'venue',    label: 'Địa điểm' },
-  { id: 'travel',   label: 'Lưu trú' },
   { id: 'registry', label: 'Quà cưới' },
   { id: 'gallery',  label: 'Album' },
 ]

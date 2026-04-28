@@ -153,30 +153,48 @@ export function OurStory() {
               <motion.div
                 key={i}
                 variants={fadeUpChild}
-                className="grid gap-8 md:gap-12 md:grid-cols-12 items-start"
+                className={`grid gap-8 md:gap-12 items-start ${m.photos.length === 0 ? '' : 'md:grid-cols-12'}`}
               >
-                {/* Text — narrow column */}
-                <div className="md:col-span-3">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-ink-muted)] shrink-0" />
-                    <p className="eyebrow">{m.date}</p>
+                {m.photos.length === 0 ? (
+                  /* Text-only milestone — full width, editorial style */
+                  <div className="max-w-2xl">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-ink-muted)] shrink-0" />
+                      <p className="eyebrow">{m.date}</p>
+                    </div>
+                    <h3 className="font-display text-3xl md:text-4xl text-[var(--color-ink)]">
+                      {m.title}
+                    </h3>
+                    <p className="mt-5 text-[var(--color-ink-muted)] leading-relaxed text-base md:text-lg max-w-lg">
+                      {m.description}
+                    </p>
                   </div>
-                  <h3 className="font-display text-2xl md:text-3xl text-[var(--color-ink)]">
-                    {m.title}
-                  </h3>
-                  <p className="mt-4 text-[var(--color-ink-muted)] leading-relaxed text-sm md:text-base">
-                    {m.description}
-                  </p>
-                </div>
+                ) : (
+                  <>
+                    {/* Text — narrow column */}
+                    <div className="md:col-span-3">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-ink-muted)] shrink-0" />
+                        <p className="eyebrow">{m.date}</p>
+                      </div>
+                      <h3 className="font-display text-2xl md:text-3xl text-[var(--color-ink)]">
+                        {m.title}
+                      </h3>
+                      <p className="mt-4 text-[var(--color-ink-muted)] leading-relaxed text-sm md:text-base">
+                        {m.description}
+                      </p>
+                    </div>
 
-                {/* Photo collage — wide column */}
-                <div className="md:col-span-9">
-                  <PhotoCollage
-                    photos={m.photos}
-                    startIndex={startIndices[i]}
-                    onOpen={setLightboxIndex}
-                  />
-                </div>
+                    {/* Photo collage — wide column */}
+                    <div className="md:col-span-9">
+                      <PhotoCollage
+                        photos={m.photos}
+                        startIndex={startIndices[i]}
+                        onOpen={setLightboxIndex}
+                      />
+                    </div>
+                  </>
+                )}
               </motion.div>
             ))}
           </motion.div>
