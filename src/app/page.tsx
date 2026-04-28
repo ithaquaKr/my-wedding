@@ -25,9 +25,9 @@ export default function Home() {
             <Divider className="py-6" />
             <TheWedding />
             <Map />
-            <GiftRegistry />
             <Divider className="py-6" />
             <Gallery />
+            <GiftRegistry />
           </main>
           <Footer />
           <FloatingNav />

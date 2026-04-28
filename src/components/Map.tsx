@@ -50,7 +50,7 @@ export function Map() {
                 src={venue.mapEmbedUrl}
                 width="100%"
                 height="100%"
-                style={{ border: 0, filter: 'grayscale(1) contrast(1.05)' }}
+                style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

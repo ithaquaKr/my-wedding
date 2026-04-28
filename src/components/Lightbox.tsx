@@ -70,7 +70,7 @@ export function Lightbox({ images, currentIndex, onClose, onPrev, onNext }: Ligh
               width={1200}
               height={800}
               className="object-contain w-full h-full max-h-[85vh]"
-              style={{ filter: 'grayscale(1) contrast(1.05)' }}
+              style={{}}
             />
             <p className="text-center text-white/60 text-sm mt-3 tracking-[0.3em] uppercase">
               {currentIndex + 1} / {images.length}

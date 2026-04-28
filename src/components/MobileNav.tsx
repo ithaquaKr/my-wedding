@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const MOBILE_SECTIONS = [
-  { id: 'letter',  label: 'Thư ngỏ' },
-  { id: 'story',   label: 'Chuyện' },
-  { id: 'wedding', label: 'Lễ cưới' },
-  { id: 'venue',   label: 'Địa điểm' },
-  { id: 'gallery', label: 'Album' },
+  { id: 'letter',   label: 'Thư ngỏ' },
+  { id: 'story',    label: 'Chuyện' },
+  { id: 'wedding',  label: 'Lễ cưới' },
+  { id: 'venue',    label: 'Địa điểm' },
+  { id: 'gallery',  label: 'Album' },
+  { id: 'registry', label: 'Quà cưới' },
 ]
 
 export function MobileNav() {
