@@ -24,6 +24,7 @@ export default async function OGImage() {
   const groom = weddingConfig.groom.toUpperCase()
   const bride = weddingConfig.bride.toUpperCase()
   const date = '10 . 05 . 2026'
+  const location = 'Hà Nội'
 
   const displayFont = fontDisplay ? 'Playfair Display' : 'Georgia, serif'
   const bodyFont = fontBody ? 'Inter' : 'system-ui, sans-serif'
@@ -66,15 +67,30 @@ export default async function OGImage() {
           }}
         />
 
+        {/* Headline */}
+        <p
+          style={{
+            fontFamily: bodyFont,
+            fontSize: 16,
+            letterSpacing: '0.45em',
+            color: '#8a4a64',
+            textTransform: 'uppercase',
+            margin: '0 0 20px',
+            fontWeight: 300,
+          }}
+        >
+          Thiệp Cưới
+        </p>
+
         {/* Eyebrow */}
         <p
           style={{
             fontFamily: bodyFont,
-            fontSize: 18,
+            fontSize: 16,
             letterSpacing: '0.35em',
-            color: '#8a4a64',
+            color: '#b07090',
             textTransform: 'uppercase',
-            margin: '0 0 36px',
+            margin: '0 0 32px',
             fontWeight: 300,
           }}
         >
@@ -85,9 +101,9 @@ export default async function OGImage() {
         <h1
           style={{
             fontFamily: displayFont,
-            fontSize: 88,
+            fontSize: 84,
             color: '#2d1520',
-            margin: '0 0 36px',
+            margin: '0 0 32px',
             fontWeight: 600,
             letterSpacing: '-0.01em',
             lineHeight: 1,
@@ -107,36 +123,50 @@ export default async function OGImage() {
             width: 80,
             height: 1,
             backgroundColor: '#d4a0b5',
-            margin: '0 0 36px',
+            margin: '0 0 32px',
           }}
         />
 
-        {/* Date */}
+        {/* Date + location */}
         <p
           style={{
             fontFamily: bodyFont,
-            fontSize: 26,
+            fontSize: 24,
             letterSpacing: '0.4em',
             color: '#8a4a64',
-            margin: '0 0 12px',
+            margin: '0 0 10px',
             fontWeight: 300,
           }}
         >
           {date}
         </p>
 
-        {/* Venue hint */}
         <p
           style={{
             fontFamily: bodyFont,
-            fontSize: 16,
+            fontSize: 15,
             letterSpacing: '0.2em',
             color: '#c49aaa',
-            margin: 0,
+            margin: '0 0 40px',
             fontWeight: 300,
           }}
         >
-          TP. Hồ Chí Minh
+          {location}
+        </p>
+
+        {/* CTA */}
+        <p
+          style={{
+            fontFamily: bodyFont,
+            fontSize: 13,
+            letterSpacing: '0.25em',
+            color: '#d4a0b5',
+            margin: 0,
+            fontWeight: 300,
+            textTransform: 'uppercase',
+          }}
+        >
+          Nhấn để xem thiệp mời →
         </p>
       </div>
     ),

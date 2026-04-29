@@ -46,8 +46,8 @@ const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_URL}`
     : 'http://localhost:3000'
 
-const title = `${weddingConfig.groom} & ${weddingConfig.bride} · 10.05.2026`
-const description = `Trân trọng kính mời bạn đến dự lễ thành hôn của ${weddingConfig.groom} và ${weddingConfig.bride} vào ngày 10 tháng 05 năm 2026 tại TP. Hồ Chí Minh.`
+const title = `Thiệp Mời Cưới · ${weddingConfig.groom} & ${weddingConfig.bride} · 10.05.2026`
+const description = `Trân trọng kính mời bạn đến dự lễ thành hôn của ${weddingConfig.groom} và ${weddingConfig.bride} vào ngày 10 tháng 05 năm 2026 tại Hà Nội. Nhấn để xem thiệp mời.`
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
