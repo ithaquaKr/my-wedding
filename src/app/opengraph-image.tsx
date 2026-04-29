@@ -1,4 +1,4 @@
-import { ImageResponse } from 'next/og'
+import { ImageResponse, type Font } from 'next/og'
 import { weddingConfig } from '@/config/wedding'
 
 export const runtime = 'edge'
@@ -25,8 +25,7 @@ export default async function OGImage() {
   const bride = weddingConfig.bride.toUpperCase()
   const date = '10 . 05 . 2026'
 
-  type FontEntry = { name: string; data: ArrayBuffer; weight: number; style: 'normal' | 'italic' }
-  const fonts: FontEntry[] = []
+  const fonts: Font[] = []
   if (fontDisplay) fonts.push({ name: 'Playfair Display', data: fontDisplay, weight: 600, style: 'normal' })
   if (fontBody) fonts.push({ name: 'Inter', data: fontBody, weight: 300, style: 'normal' })
 
