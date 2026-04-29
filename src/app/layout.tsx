@@ -40,12 +40,47 @@ const greatVibes = Great_Vibes({
   display: 'swap',
 })
 
+const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000'
+
+const title = `${weddingConfig.groom} & ${weddingConfig.bride} · 10.05.2026`
+const description = `Trân trọng kính mời bạn đến dự lễ thành hôn của ${weddingConfig.groom} và ${weddingConfig.bride} vào ngày 10 tháng 05 năm 2026 tại TP. Hồ Chí Minh.`
+
 export const metadata: Metadata = {
-  title: `${weddingConfig.groom} & ${weddingConfig.bride} | Đám cưới`,
-  description: `Trân trọng kính mời bạn đến dự lễ cưới của ${weddingConfig.groom} và ${weddingConfig.bride}`,
+  metadataBase: new URL(baseUrl),
+  title,
+  description,
+
   openGraph: {
-    title: `${weddingConfig.groom} & ${weddingConfig.bride}`,
-    description: 'Chúng tôi trân trọng kính mời bạn đến chung vui trong ngày trọng đại',
+    type: 'website',
+    locale: 'vi_VN',
+    url: baseUrl,
+    siteName: `${weddingConfig.groom} & ${weddingConfig.bride}`,
+    title,
+    description,
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+  },
+
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/icon.svg',
+  },
+
+  themeColor: '#fdeef3',
+
+  robots: {
+    index: false,
+    follow: false,
   },
 }
 
