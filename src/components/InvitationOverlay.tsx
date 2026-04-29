@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { weddingConfig } from '@/config/wedding'
+import { type BrideSlot, BRIDE_SLOTS, weddingConfig } from '@/config/wedding'
 import { useVenue } from '@/components/VenueProvider'
 
 const SESSION_KEY = 'invitation-dismissed'
@@ -49,8 +49,14 @@ const NAME = {
 export function InvitationOverlay() {
   const searchParams = useSearchParams()
   const guestName = searchParams.get('to') ?? ''
+  const side = searchParams.get('side')
+  const slotParam = searchParams.get('slot') as BrideSlot | null
+  const brideSlot = side === 'bride' && slotParam && slotParam in BRIDE_SLOTS ? slotParam : null
   const venue = useVenue()
   const [visible, setVisible] = useState(false)
+
+  const displayDate = brideSlot ? BRIDE_SLOTS[brideSlot].sub : formatDate(weddingConfig.weddingDate)
+  const displayTime = brideSlot ? BRIDE_SLOTS[brideSlot].displayTime : null
 
   useEffect(() => {
     if (!guestName) return
@@ -136,9 +142,10 @@ export function InvitationOverlay() {
 
             {/* Date + venue */}
             <motion.div variants={ITEM} className="space-y-1">
-              <p className="eyebrow capitalize tracking-[0.28em]">
-                {formatDate(weddingConfig.weddingDate)}
-              </p>
+              {displayTime && (
+                <p className="eyebrow tracking-[0.32em] mb-1">{displayTime}</p>
+              )}
+              <p className="eyebrow capitalize tracking-[0.22em]">{displayDate}</p>
               <p className="text-[10px] text-[var(--color-ink-muted)] tracking-[0.12em]">
                 {venue.name}
               </p>

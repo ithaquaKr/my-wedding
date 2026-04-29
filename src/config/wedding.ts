@@ -15,6 +15,23 @@
 
 export type WeddingSide = 'bride' | 'groom'
 
+export type BrideSlot = 'evening' | 'morning'
+
+export const BRIDE_SLOTS: Record<BrideSlot, { label: string; sub: string; iso: string; displayTime: string }> = {
+  evening: {
+    label: '17:00 · Ngày 09/05',
+    sub: 'Thứ Bảy, 09 tháng 05 năm 2026',
+    iso: '2026-05-09T17:00:00+07:00',
+    displayTime: '17:00',
+  },
+  morning: {
+    label: '09:30 · Ngày 10/05',
+    sub: 'Chủ Nhật, 10 tháng 05 năm 2026',
+    iso: '2026-05-10T09:30:00+07:00',
+    displayTime: '09:30',
+  },
+}
+
 export type Venue = {
   /** Section label (e.g. "Tiệc cưới nhà trai") */
   label: string
@@ -121,6 +138,28 @@ export type WeddingConfig = {
 // ──────────────────────────────────────────────────────────────────────
 // Per-side venue config
 // ──────────────────────────────────────────────────────────────────────
+
+// Schedule for bride side (3 events across 2 days)
+export const brideSchedule: ScheduleItem[] = [
+  {
+    icon: 'plate',
+    time: '17:00 · 09/05',
+    title: 'Tiệc cưới',
+    description: 'Bữa tiệc chiều tối tại nhà gái, trước ngày lễ thành hôn.',
+  },
+  {
+    icon: 'plate',
+    time: '09:30 · 10/05',
+    title: 'Tiệc cưới',
+    description: 'Bữa tiệc sáng tại nhà gái trong ngày lễ thành hôn.',
+  },
+  {
+    icon: 'rings',
+    time: '15:00 · 10/05',
+    title: 'Lễ thành hôn',
+    description: 'Nghi lễ trao nhẫn và lời thề ước trước sự chứng kiến của hai gia đình.',
+  },
+]
 
 export const groomVenue: Venue = {
   label: 'Tiệc cưới nhà trai',

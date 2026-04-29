@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { weddingConfig } from '@/config/wedding'
+import { type BrideSlot, BRIDE_SLOTS, weddingConfig } from '@/config/wedding'
 
 type Side = 'groom' | 'bride'
 
@@ -13,11 +13,13 @@ const SIDE_OPTIONS: { value: Side; label: string; sub: string }[] = [
 export default function InvitePage() {
   const [name, setName] = useState('')
   const [side, setSide] = useState<Side>('groom')
+  const [slot, setSlot] = useState<BrideSlot>('morning')
   const [copied, setCopied] = useState(false)
 
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
+  const slotParam = side === 'bride' ? `&slot=${slot}` : ''
   const generatedUrl = name.trim()
-    ? `${baseUrl}/?to=${encodeURIComponent(name.trim())}&side=${side}`
+    ? `${baseUrl}/?to=${encodeURIComponent(name.trim())}&side=${side}${slotParam}`
     : ''
 
   const handleCopy = async () => {
@@ -83,6 +85,40 @@ export default function InvitePage() {
             })}
           </div>
         </div>
+
+        {/* Bride time slot selector */}
+        {side === 'bride' && (
+          <div className="mb-8">
+            <p className="eyebrow block mb-3">Khung giờ mời</p>
+            <div className="grid grid-cols-2 gap-3">
+              {(Object.entries(BRIDE_SLOTS) as [BrideSlot, typeof BRIDE_SLOTS[BrideSlot]][]).map(([key, opt]) => {
+                const active = slot === key
+                return (
+                  <button
+                    key={key}
+                    onClick={() => setSlot(key)}
+                    className="flex flex-col items-center gap-1 py-4 px-3 border transition-colors duration-200 cursor-pointer"
+                    style={{
+                      borderColor: active ? 'var(--color-ink)' : 'var(--color-hairline)',
+                      background: active ? 'var(--color-ink)' : 'transparent',
+                      color: active ? 'var(--color-cream)' : 'var(--color-ink)',
+                    }}
+                  >
+                    <span className="text-[11px] tracking-[0.22em] uppercase font-body font-medium">
+                      {opt.label}
+                    </span>
+                    <span
+                      className="text-[10px] tracking-[0.06em]"
+                      style={{ color: active ? 'rgba(253,238,243,0.7)' : 'var(--color-ink-muted)' }}
+                    >
+                      {opt.sub}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Name input */}
         <div className="mb-6">

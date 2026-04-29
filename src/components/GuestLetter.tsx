@@ -2,13 +2,42 @@
 
 import { motion } from 'framer-motion'
 import { useSearchParams } from 'next/navigation'
-import { weddingConfig } from '@/config/wedding'
+import { type BrideSlot, BRIDE_SLOTS, weddingConfig } from '@/config/wedding'
 
 const EASE = [0.22, 1, 0.36, 1] as const
+
+const ELDER_PREFIXES = ['anh', 'chị', 'cô', 'chú']
+const KNOWN_HONORIFICS = ['anh', 'chị', 'cô', 'chú', 'bạn', 'em']
+
+function getFirstWord(name: string) {
+  return name.trim().toLowerCase().split(/\s+/)[0]
+}
+
+function getPronoun(name: string | null) {
+  if (!name) return 'chúng tớ'
+  return ELDER_PREFIXES.includes(getFirstWord(name)) ? 'chúng em' : 'chúng tớ'
+}
+
+// Second-person pronoun derived from the honorific in the name ("Chị Minh" → "chị")
+function getYouPronoun(name: string | null): string {
+  if (!name) return 'bạn'
+  const first = getFirstWord(name)
+  return KNOWN_HONORIFICS.includes(first) ? first : 'bạn'
+}
 
 export function GuestLetter() {
   const searchParams = useSearchParams()
   const guestName = searchParams.get('to')
+  const pronoun = getPronoun(guestName)
+  const Pronoun = pronoun.charAt(0).toUpperCase() + pronoun.slice(1)
+  const you = getYouPronoun(guestName)
+
+  const side = searchParams.get('side')
+  const slotParam = searchParams.get('slot') as BrideSlot | null
+  const brideSlot = side === 'bride' && slotParam && slotParam in BRIDE_SLOTS ? slotParam : null
+  const closingDate = brideSlot
+    ? `lúc ${BRIDE_SLOTS[brideSlot].displayTime}, ${BRIDE_SLOTS[brideSlot].sub}`
+    : 'ngày 10 tháng 5 năm 2026'
 
   const groomInitial = weddingConfig.groom.charAt(0)
   const brideInitial = weddingConfig.bride.charAt(0)
@@ -44,7 +73,7 @@ export function GuestLetter() {
           className="font-script mt-5 leading-[1.1] text-[var(--color-cream)]"
           style={{ fontSize: 'clamp(3rem,10vw,6rem)' }}
         >
-          {guestName ? `Gửi bạn, ${guestName}` : 'Gửi bạn'}
+          {guestName ? `Gửi ${guestName}` : 'Gửi bạn'}
         </motion.h2>
 
         {/* Hairline + monogram */}
@@ -93,23 +122,23 @@ export function GuestLetter() {
             color: 'rgba(253,238,243,0.82)',
           }}
         >
-          <p>Bạn thân mến,</p>
+          <p>{guestName ? `${guestName} thân mến,` : 'Bạn thân mến,'}</p>
           <p>
             Có những khoảnh khắc trong cuộc đời mà ta muốn được chia sẻ cùng tất cả những người
-            mình yêu thương nhất. Và đám cưới của chúng tôi chính là một trong những khoảnh khắc
+            mình yêu thương nhất. Và đám cưới của {pronoun} chính là một trong những khoảnh khắc
             như vậy.
           </p>
           <p>
-            Chúng tôi đã đồng hành cùng nhau qua những ngày vui, những lúc khó khăn, và cả những
-            khoảnh khắc bình dị nhất. Hôm nay, chúng tôi chọn nhau — không phải vì hoàn cảnh hay
-            sự tình cờ, mà vì chúng tôi hiểu rằng không ai khác có thể làm cho nhau trọn vẹn hơn.
+            {Pronoun} đã đồng hành cùng nhau qua những ngày vui, những lúc khó khăn, và cả những
+            khoảnh khắc bình dị nhất. Hôm nay, {pronoun} chọn nhau — không phải vì hoàn cảnh hay
+            sự tình cờ, mà vì {pronoun} hiểu rằng không ai khác có thể làm cho nhau trọn vẹn hơn.
           </p>
           <p>
-            Sự hiện diện của bạn trong ngày trọng đại này là món quà vô giá nhất mà bạn có thể
-            trao cho chúng tôi. Chúng tôi mong được ôm bạn, cười cùng bạn, và ghi lại khoảnh khắc
+            Sự hiện diện của {you} trong ngày trọng đại này là món quà vô giá nhất mà {you} có thể
+            trao cho {pronoun}. {Pronoun} mong được ôm {you}, cười cùng {you}, và ghi lại khoảnh khắc
             ấy mãi trong ký ức.
           </p>
-          <p>Hẹn gặp bạn vào ngày 10 tháng 5 năm 2026.</p>
+          <p>Hẹn gặp {you} vào {closingDate}.</p>
         </motion.div>
 
         {/* Signature */}

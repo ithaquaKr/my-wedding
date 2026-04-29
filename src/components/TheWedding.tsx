@@ -1,11 +1,17 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { weddingConfig } from '@/config/wedding'
+import { useSearchParams } from 'next/navigation'
+import { weddingConfig, brideSchedule } from '@/config/wedding'
 import { iconMap } from './Icons'
 import { staggerContainer, fadeUpChild } from '@/lib/animations'
 
 export function TheWedding() {
+  const searchParams = useSearchParams()
+  const isBride = searchParams.get('side') === 'bride'
+  const schedule = isBride ? brideSchedule : weddingConfig.schedule
+  const isTriplet = schedule.length === 3
+
   return (
     <section
       id="wedding"
@@ -20,7 +26,9 @@ export function TheWedding() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="text-center"
         >
-          <p className="eyebrow tracking-[0.4em]">10 . 05 . 2026</p>
+          <p className="eyebrow tracking-[0.4em]">
+            {isBride ? '09 – 10 . 05 . 2026' : '10 . 05 . 2026'}
+          </p>
           <h2 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] mt-4 leading-[0.95]">
             NGÀY TRỌNG ĐẠI
             <br />
@@ -38,7 +46,7 @@ export function TheWedding() {
         />
 
         {/* Timeline grid */}
-        <div className="relative max-w-2xl mx-auto">
+        <div className={`relative mx-auto ${isTriplet ? 'max-w-3xl' : 'max-w-2xl'}`}>
           {/* Horizontal connector — desktop only */}
           <motion.div
             initial={{ scaleX: 0 }}
@@ -46,17 +54,21 @@ export function TheWedding() {
             viewport={{ once: true }}
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
             className="absolute hidden md:block h-px bg-[var(--color-hairline)] top-8"
-            style={{ left: '25%', right: '25%', transformOrigin: 'left' }}
+            style={{
+              left: isTriplet ? '17%' : '25%',
+              right: isTriplet ? '17%' : '25%',
+              transformOrigin: 'left',
+            }}
           />
 
           <motion.div
-            className="grid gap-14 md:grid-cols-2"
+            className={`grid gap-14 ${isTriplet ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}
             variants={staggerContainer}
             whileInView="visible"
             initial="hidden"
             viewport={{ once: true }}
           >
-            {weddingConfig.schedule.map((item, i) => {
+            {schedule.map((item, i) => {
               const Icon = iconMap[item.icon]
               return (
                 <motion.div
