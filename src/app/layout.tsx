@@ -40,11 +40,13 @@ const greatVibes = Great_Vibes({
   display: 'swap',
 })
 
-const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'http://localhost:3000'
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000')
 
 const title = `Thiệp Mời Cưới · ${weddingConfig.groom} & ${weddingConfig.bride} · 10.05.2026`
 const description = `Trân trọng kính mời bạn đến dự lễ thành hôn của ${weddingConfig.groom} và ${weddingConfig.bride} vào ngày 10 tháng 05 năm 2026 tại Hà Nội. Nhấn để xem thiệp mời.`
