@@ -1,4 +1,4 @@
-import { ImageResponse, type Font } from 'next/og'
+import { ImageResponse } from 'next/og'
 import { weddingConfig } from '@/config/wedding'
 
 export const runtime = 'edge'
@@ -25,12 +25,14 @@ export default async function OGImage() {
   const bride = weddingConfig.bride.toUpperCase()
   const date = '10 . 05 . 2026'
 
-  const fonts: Font[] = []
-  if (fontDisplay) fonts.push({ name: 'Playfair Display', data: fontDisplay, weight: 600, style: 'normal' })
-  if (fontBody) fonts.push({ name: 'Inter', data: fontBody, weight: 300, style: 'normal' })
-
   const displayFont = fontDisplay ? 'Playfair Display' : 'Georgia, serif'
   const bodyFont = fontBody ? 'Inter' : 'system-ui, sans-serif'
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fontOptions: any[] = [
+    ...(fontDisplay ? [{ name: 'Playfair Display', data: fontDisplay, weight: 600, style: 'normal' }] : []),
+    ...(fontBody ? [{ name: 'Inter', data: fontBody, weight: 300, style: 'normal' }] : []),
+  ]
 
   return new ImageResponse(
     (
@@ -138,6 +140,6 @@ export default async function OGImage() {
         </p>
       </div>
     ),
-    { ...size, fonts }
+    { ...size, fonts: fontOptions }
   )
 }
