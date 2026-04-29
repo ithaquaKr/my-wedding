@@ -25,7 +25,8 @@ export default async function OGImage() {
   const bride = weddingConfig.bride.toUpperCase()
   const date = '10 . 05 . 2026'
 
-  const fonts: ConstructorParameters<typeof ImageResponse>[1]['fonts'] = []
+  type FontEntry = { name: string; data: ArrayBuffer; weight: number; style: 'normal' | 'italic' }
+  const fonts: FontEntry[] = []
   if (fontDisplay) fonts.push({ name: 'Playfair Display', data: fontDisplay, weight: 600, style: 'normal' })
   if (fontBody) fonts.push({ name: 'Inter', data: fontBody, weight: 300, style: 'normal' })
 
