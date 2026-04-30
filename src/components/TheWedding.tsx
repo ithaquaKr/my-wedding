@@ -10,7 +10,9 @@ export function TheWedding() {
   const searchParams = useSearchParams()
   const isBride = searchParams.get('side') === 'bride'
   const schedule = isBride ? brideSchedule : weddingConfig.schedule
-  const isTriplet = schedule.length === 3
+  const count = schedule.length
+  const isTriplet = count === 3
+  const isQuad = count === 4
 
   return (
     <section
@@ -47,22 +49,24 @@ export function TheWedding() {
 
         {/* Timeline grid */}
         <div className={`relative mx-auto ${isTriplet ? 'max-w-3xl' : 'max-w-2xl'}`}>
-          {/* Horizontal connector — desktop only */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute hidden md:block h-px bg-[var(--color-hairline)] top-8"
-            style={{
-              left: isTriplet ? '17%' : '25%',
-              right: isTriplet ? '17%' : '25%',
-              transformOrigin: 'left',
-            }}
-          />
+          {/* Horizontal connector — desktop only, single-row layouts only */}
+          {!isQuad && (
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute hidden md:block h-px bg-[var(--color-hairline)] top-8"
+              style={{
+                left: isTriplet ? '17%' : '25%',
+                right: isTriplet ? '17%' : '25%',
+                transformOrigin: 'left',
+              }}
+            />
+          )}
 
           <motion.div
-            className={`grid gap-14 ${isTriplet ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}
+            className={`grid gap-14 ${isTriplet ? 'md:grid-cols-3' : isQuad ? 'md:grid-cols-2' : 'md:grid-cols-2'}`}
             variants={staggerContainer}
             whileInView="visible"
             initial="hidden"

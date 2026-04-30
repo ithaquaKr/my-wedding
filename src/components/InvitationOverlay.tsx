@@ -137,7 +137,9 @@ export function InvitationOverlay() {
               variants={ITEM}
               className="font-display italic text-[1.45rem] text-[var(--color-ink)] tracking-tight mb-9"
             >
-              {weddingConfig.groom} &amp; {weddingConfig.bride}
+              {side === 'bride'
+                ? `${weddingConfig.bride} & ${weddingConfig.groom}`
+                : `${weddingConfig.groom} & ${weddingConfig.bride}`}
             </motion.p>
 
             {/* Date + venue */}

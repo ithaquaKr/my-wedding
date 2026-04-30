@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { useSearchParams } from 'next/navigation'
 import { weddingConfig } from '@/config/wedding'
 import { Countdown } from '@/components/Countdown'
 
@@ -29,6 +30,11 @@ function CharReveal({ text, delay = 0 }: { text: string; delay?: number }) {
 }
 
 export function Hero() {
+  const searchParams = useSearchParams()
+  const isBride = searchParams.get('side') === 'bride'
+  const first = isBride ? weddingConfig.bride : weddingConfig.groom
+  const second = isBride ? weddingConfig.groom : weddingConfig.bride
+
   const sectionRef = useRef<HTMLElement>(null)
   const shouldReduce = useReducedMotion()
   const { scrollYProgress } = useScroll({
@@ -97,7 +103,7 @@ export function Hero() {
             textShadow: '0 4px 32px rgba(0,0,0,0.7)',
           }}
         >
-          <CharReveal text={weddingConfig.groom} delay={0.5} />
+          <CharReveal text={first} delay={0.5} />
           <motion.span
             initial={{ opacity: 0, scale: 0.3 }}
             animate={{ opacity: 0.9, scale: 1 }}
@@ -107,7 +113,7 @@ export function Hero() {
           >
             &amp;
           </motion.span>
-          <CharReveal text={weddingConfig.bride} delay={1.35} />
+          <CharReveal text={second} delay={1.35} />
         </h1>
 
         {/* Date with extending lines */}

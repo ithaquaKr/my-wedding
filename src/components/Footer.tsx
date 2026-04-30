@@ -1,11 +1,17 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useSearchParams } from 'next/navigation'
 import { weddingConfig } from '@/config/wedding'
 
 export function Footer() {
+  const searchParams = useSearchParams()
+  const isBride = searchParams.get('side') === 'bride'
+  const first = isBride ? weddingConfig.bride : weddingConfig.groom
+  const second = isBride ? weddingConfig.groom : weddingConfig.bride
+
   const lastInitial = (name: string) => name.trim().split(' ').at(-1)?.charAt(0) ?? name.charAt(0)
-  const initials = `${lastInitial(weddingConfig.groom)} & ${lastInitial(weddingConfig.bride)}`
+  const initials = `${lastInitial(first)} & ${lastInitial(second)}`
 
   return (
     <footer className="bg-[var(--color-ink)] text-[var(--color-cream)] py-24 px-6 overflow-hidden">
@@ -18,9 +24,9 @@ export function Footer() {
           className="font-display tracking-wide whitespace-nowrap"
           style={{ fontSize: 'clamp(1.4rem, 5.5vw, 4.5rem)' }}
         >
-          {weddingConfig.groom.toUpperCase()}{' '}
+          {first.toUpperCase()}{' '}
           <span className="italic font-normal">&amp;</span>{' '}
-          {weddingConfig.bride.toUpperCase()}
+          {second.toUpperCase()}
         </motion.p>
 
         <motion.div
@@ -66,7 +72,7 @@ export function Footer() {
           transition={{ duration: 1, delay: 0.7 }}
           className="mt-12 text-[10px] tracking-[0.3em] uppercase text-[var(--color-cream)]/35"
         >
-          &copy; {new Date().getFullYear()} — {weddingConfig.groom} &amp; {weddingConfig.bride}
+          &copy; {new Date().getFullYear()} — {first} &amp; {second}
         </motion.p>
       </div>
     </footer>

@@ -154,6 +154,12 @@ export const brideSchedule: ScheduleItem[] = [
     description: 'Bữa tiệc sáng tại nhà gái trong ngày lễ thành hôn.',
   },
   {
+    icon: 'heart',
+    time: '14:00 · 10/05',
+    title: 'Lễ Vu Quy',
+    description: 'Nghi lễ truyền thống đón cô dâu về nhà chồng, trước lễ thành hôn.',
+  },
+  {
     icon: 'rings',
     time: '15:00 · 10/05',
     title: 'Lễ thành hôn',
