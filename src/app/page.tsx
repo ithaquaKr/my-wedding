@@ -39,13 +39,16 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   const ogParams = new URLSearchParams({ ...(to && { to }), side, ...(slot && { slot }) })
   const ogImageUrl = `${baseUrl}/api/og?${ogParams.toString()}`
 
+  const pageParams = new URLSearchParams({ ...(to && { to }), ...(side !== 'groom' && { side }), ...(slot && { slot }) })
+  const canonicalUrl = to ? `${baseUrl}/?${pageParams.toString()}` : baseUrl
+
   return {
     title,
     description,
     openGraph: {
       type: 'website',
       locale: 'vi_VN',
-      url: baseUrl,
+      url: canonicalUrl,
       siteName: `${weddingConfig.groom} & ${weddingConfig.bride}`,
       title,
       description,
